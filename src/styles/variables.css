@@ -6,8 +6,13 @@
   /* Text Colors */
   --primary-text-color: #14141A;
   --primary-text-hover-color: #14141a95;
-
   --menu-btn-hover-color: #fff;
+
+  /* Button Colors */
+  --primary-btn-bg-color: #4B532D;
+  --primary-btn-bg-hover-color: #929E57;
+  --primary-btn-bg-disabled-color: #4b532d80;
+  --primary-btn-color: #FCFCFC;
 
   /* Border Colors */
   --navbar-border-color: #14141A;

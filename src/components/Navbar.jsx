@@ -64,6 +64,16 @@ export default function Navbar() {
                   My Account
                 </NavLink>
               </li>
+              <li className={`${styles.navItem} ${styles.loginBtn}`}>
+                <NavLink 
+                  to="login" 
+                  className={({isActive}) => isActive ? `${styles.navLink} ${styles.active}` : `${styles.navLink}`}
+                  onClick={() => setIsMenuShown(false)}
+                  >
+                    
+                  Log in
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>

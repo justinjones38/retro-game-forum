@@ -1,6 +1,7 @@
 import { useState } from "react"
 import styles from "./AccountSetup.module.css"
 import { Link } from "react-router";
+import { supabase } from "../../services/createClient";
 
 export default function Create() {
   const [email, setEmail] = useState("");
@@ -21,6 +22,7 @@ export default function Create() {
           id="email" 
           placeholder="abc@email.com" 
           className={styles.input}
+          required
         />
 
         <label htmlFor="username" className={styles.label}>Username</label>
@@ -31,6 +33,7 @@ export default function Create() {
           id="username" 
           placeholder="abc123" 
           className={styles.input}
+          required
         />
 
         <label htmlFor="password" className={styles.label}>Password</label>
@@ -41,6 +44,7 @@ export default function Create() {
           id="password" 
           placeholder="******" 
           className={styles.input}
+          required
         />
 
         <label htmlFor="confirmPassword" className={styles.label}>Confirm Password</label>
@@ -51,6 +55,7 @@ export default function Create() {
           id="confirmPassword" 
           placeholder="******" 
           className={styles.input}
+          required
         />
         <button className={styles.btn}>Login</button>
       </form>

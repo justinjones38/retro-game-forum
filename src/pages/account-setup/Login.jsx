@@ -20,6 +20,7 @@ export default function Login() {
           id="email" 
           placeholder="abc@email.com" 
           className={styles.input}
+          required
         />
 
         <label htmlFor="password" className={styles.label}>Password</label>
@@ -30,6 +31,7 @@ export default function Login() {
           id="password" 
           placeholder="******" 
           className={styles.input}
+          required
         />
         <button className={styles.btn}>Login</button>
       </form>

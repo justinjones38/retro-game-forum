@@ -1,16 +1,17 @@
 import { useState } from "react"
-import styles from "./Login.module.css"
+import styles from "./AccountSetup.module.css"
 import { Link } from "react-router";
 
-export default function Login() {
+export default function Create() {
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
-  console.log("run");
 
   return (
     <section className={styles.container}>
-      <h2 className={styles.title}>Login Page</h2>
+      <h2 className={styles.title}>Create Account</h2>
       <form className={styles.form}>
         <label htmlFor="email" className={styles.label}>Email</label>
         <input 
@@ -19,6 +20,16 @@ export default function Login() {
           onChange={(e) => setEmail(e.target.value)} 
           id="email" 
           placeholder="abc@email.com" 
+          className={styles.input}
+        />
+
+        <label htmlFor="username" className={styles.label}>Username</label>
+        <input 
+          type="username" 
+          value={username} 
+          onChange={(e) => setUsername(e.target.value)} 
+          id="username" 
+          placeholder="abc123" 
           className={styles.input}
         />
 
@@ -31,11 +42,21 @@ export default function Login() {
           placeholder="******" 
           className={styles.input}
         />
+
+        <label htmlFor="confirmPassword" className={styles.label}>Confirm Password</label>
+        <input 
+          type="confirmPassword" 
+          value={confirmPassword} 
+          onChange={(e) => setConfirmPassword(e.target.value)} 
+          id="confirmPassword" 
+          placeholder="******" 
+          className={styles.input}
+        />
         <button className={styles.btn}>Login</button>
       </form>
 
       <p className={styles.description}>
-        Don't have an account. <Link to="#">Create new account here</Link>
+        Already have an account. <Link to="/login">Login here</Link>
       </p>
     </section>
   )

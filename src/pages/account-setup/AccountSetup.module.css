@@ -15,6 +15,10 @@
   margin-bottom: 0.75em;
 }
 
+.input:last-of-type {
+  margin-bottom: 1.5em;
+}
+
 .btn {
   display: block;
   font-size: 1.05rem;
@@ -31,4 +35,19 @@
 
 .btn:focus, .btn:hover {
   background-color: var(--primary-btn-bg-hover-color);
+}
+
+.description {
+  text-align: center;
+}
+
+.description > a {
+  color: var(--link-text-color);
+  transition: 0.3s color 0.3s border-bottom;
+  border-bottom: 1px solid var(--link-text-color);
+}
+
+.description > a:hover, .description > a:focus {
+  color: var(--link-text-hover-color);
+  border-bottom: 1px solid var(--link-text-hover-color);
 }

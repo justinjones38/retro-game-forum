@@ -33,3 +33,6 @@ input, a {
   font-family: inherit;
 }
 
+a {
+  text-decoration: none;
+}

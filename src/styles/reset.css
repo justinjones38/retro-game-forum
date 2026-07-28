@@ -4,3 +4,32 @@
   padding: 0;
 }
 
+body {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  font-family: "Inter", sans-serif;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  padding-left: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+img, input {
+  display: block;
+}
+
+
+input, a {
+  font-family: inherit;
+}
+

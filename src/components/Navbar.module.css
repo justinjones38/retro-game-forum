@@ -6,6 +6,7 @@ nav {
 .contentWrapper {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .leftNav {
@@ -75,4 +76,23 @@ nav {
 
 .navLink:focus, .navLink:hover {
   border-bottom: 4px solid var(--navbar-border-color);
+}
+
+@media (min-width: 600px) {
+  .closeBtn, .hamburgerMenu {
+    display: none;
+  }
+
+  .navMenu {
+    all: unset;    
+  }
+
+  .navList {
+    flex-direction: row;
+  }
+
+  .navItem {
+    font-size: 1.1rem;
+    align-items: center;
+  }
 }

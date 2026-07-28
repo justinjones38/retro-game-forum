@@ -4,9 +4,12 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
 import { Link, NavLink } from "react-router";
 import { useState } from "react";
+import useWindowWidth from "../hooks/useWindowWidth";
 
 export default function Navbar() {
   const [isMenuShown, setIsMenuShown] = useState(false);
+  const {windowWidth} = useWindowWidth();
+
   return (
     <nav>
       <div className={styles.contentWrapper}>
@@ -16,12 +19,12 @@ export default function Navbar() {
         </Link>
         <div className={styles.rightNav}>
           <GiHamburgerMenu
-            className={`${styles.icon} ${styles.menu}`}
+            className={`${styles.icon} ${styles.hamburgerMenu}`}
             onClick={() => setIsMenuShown(true)}
           />
           <div
             className={
-              isMenuShown
+              isMenuShown && windowWidth < 600
                 ? `${styles["navMenu"]} ${styles["show"]}`
                 : `${styles["navMenu"]}`
             }

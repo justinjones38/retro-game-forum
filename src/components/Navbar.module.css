@@ -20,9 +20,21 @@ nav {
   color: var(--primary-text-hover-color)
 }
 
-.logo {
+.icon {
   display: block;
   font-size: 2.2rem;
+}
+
+.hamburgerMenu {
+  display: block;
+}
+
+.hamburgerMenu, .closeBtn {
+  transition: 0.3s color;
+}
+
+.hamburgerMenu:focus, .hamburgerMenu:hover .closeBtn:focus, .closeBtn:hover {
+  color: var(--menu-btn-hover-color)
 }
 
 
@@ -42,5 +54,25 @@ nav {
 }
 
 .closeBtn {
-  margin-left: auto;
+  margin: 0 0 1.25em auto;
+}
+
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+}
+
+.navItem {
+  font-size: 1.5rem;
+}
+
+.navLink {
+  color: var(--primary-text-color);
+}
+
+.navLink:focus, .navLink:hover {
+  border-bottom: 4px solid var(--navbar-border-color);
 }

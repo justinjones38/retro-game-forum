@@ -6,5 +6,10 @@
   /* Text Colors */
   --primary-text-color: #14141A;
   --primary-text-hover-color: #14141a95;
-  
+
+  --menu-btn-hover-color: #fff;
+
+  /* Border Colors */
+  --navbar-border-color: #14141A;
+
 }

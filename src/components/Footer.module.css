@@ -1,0 +1,6 @@
+footer {
+  margin-top: auto;
+  padding: 0.75em;
+  background-color: var(--navbar-bg-color);
+  text-align: center;
+}

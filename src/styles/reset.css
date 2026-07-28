@@ -29,10 +29,14 @@ img, input {
 }
 
 
-input, a {
+input, a, button {
   font-family: inherit;
 }
 
 a {
   text-decoration: none;
+}
+
+button {
+  cursor: pointer;
 }

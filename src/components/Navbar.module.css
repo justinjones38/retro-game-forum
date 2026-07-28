@@ -1,18 +1,27 @@
 nav {
   background-color: var(--navbar-bg-color);
-  padding: 0.5em;
+  padding: 0.75em;
 }
 
-
+.contentWrapper {
+  display: flex;
+  justify-content: space-between;
+}
 
 .leftNav {
   display: flex;
   align-items: center;
   gap: 0.25em;
   color: var(--primary-text-color);
+  transition: 0.3s color;
+}
+
+.leftNav:focus, .leftNav:hover {
+  color: var(--primary-text-hover-color)
 }
 
 .logo {
   display: block;
   font-size: 2.2rem;
 }
+

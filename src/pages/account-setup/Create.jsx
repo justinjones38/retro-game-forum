@@ -1,19 +1,60 @@
 import { useState } from "react"
 import styles from "./AccountSetup.module.css"
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { supabase } from "../../services/createClient";
+import { hashPassword } from "../../utils/utils";
 
 export default function Create() {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordsMatch, setPasswordsMatch] = useState(false);
+  const [inputsCompleted, setInputsCompleted] = useState(false);
+  const [emailsMatch, setEmailsMatch] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if(!email || !name || !password || !confirmPassword) {
+      setInputsCompleted(true);
+      return
+    }
+    if(password !== confirmPassword) {
+      setPasswordsMatch(true);
+      return
+    }
+
+    const {data, error} = await supabase
+      .from ("users")
+      .select("email")
+      
+
+    const emails = data.map(item => item.email);
+
+    if(emails.includes(email)) {
+      setEmailsMatch(true);
+      return;
+    }
+
+    await supabase
+      .from("users")
+      .insert({
+        email,
+        password: hashPassword(password),
+        name
+      })
+    
+    navigate('/')
+  }
 
 
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>Create Account</h2>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        {inputsCompleted ? <p className={styles.alert}>Please complete all fields</p> : null}
+        {emailsMatch ? <p className={styles.alert}>Email already used</p> : null}
         <label htmlFor="email" className={styles.label}>Email</label>
         <input 
           type="email" 
@@ -25,17 +66,18 @@ export default function Create() {
           required
         />
 
-        <label htmlFor="username" className={styles.label}>Username</label>
+        <label htmlFor="name" className={styles.label}>Name</label>
         <input 
-          type="username" 
-          value={username} 
-          onChange={(e) => setUsername(e.target.value)} 
-          id="username" 
-          placeholder="abc123" 
+          type="text" 
+          value={name} 
+          onChange={(e) => setName(e.target.value)} 
+          id="name" 
+          placeholder="John" 
           className={styles.input}
           required
         />
 
+        {passwordsMatch ? <p className={styles.alert}>Passwords do not match</p> : null}
         <label htmlFor="password" className={styles.label}>Password</label>
         <input 
           type="password" 
@@ -49,7 +91,7 @@ export default function Create() {
 
         <label htmlFor="confirmPassword" className={styles.label}>Confirm Password</label>
         <input 
-          type="confirmPassword" 
+          type="password" 
           value={confirmPassword} 
           onChange={(e) => setConfirmPassword(e.target.value)} 
           id="confirmPassword" 

@@ -24,7 +24,7 @@ export default function Navbar() {
           />
           <div
             className={
-              isMenuShown && windowWidth < 600
+              isMenuShown && windowWidth < 750
                 ? `${styles["navMenu"]} ${styles["show"]}`
                 : `${styles["navMenu"]}`
             }
@@ -37,7 +37,7 @@ export default function Navbar() {
               <li className={styles.navItem}>
                 <NavLink 
                   to="#" 
-                  className={styles.navLink}
+                  className={({isActive}) => isActive ? `${styles.navLink} ${styles.active}` : `${styles.navLink}`}
                   onClick={() => setIsMenuShown(false)}
                   >
                     
@@ -45,23 +45,23 @@ export default function Navbar() {
                 </NavLink>
               </li>
               <li className={styles.navItem}>
-                <Link 
+                <NavLink 
                   to="#" 
-                  className={styles.navLink}
+                  className={({isActive}) => isActive ? `${styles.navLink} ${styles.active}` : `${styles.navLink}`}
                   onClick={() => setIsMenuShown(false)}
                   >
                     
                   Create New Post
-                </Link>
+                </NavLink>
               </li>
               <li className={styles.navItem}>
                 <NavLink 
                   to="#" 
-                  className={styles.navLink}
+                  className={({isActive}) => isActive ? `${styles.navLink} ${styles.active}` : `${styles.navLink}`}
                   onClick={() => setIsMenuShown(false)}
                   >
                     
-                  View Settings
+                  My Account
                 </NavLink>
               </li>
             </ul>

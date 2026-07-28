@@ -8,7 +8,7 @@ export default function Navbar() {
     <nav>
       <div className={styles.contentWrapper}>
         <Link to="." className={styles.leftNav}>
-          <IoLogoGameControllerA className={styles.menu} />
+          <IoLogoGameControllerA className={styles.logo} />
           <h1 className={styles.title}>byte&bits</h1>
         </Link>
       </div>

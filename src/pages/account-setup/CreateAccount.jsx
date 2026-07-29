@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./CreateAccount.module.css";
-import { Link, useNavigate } from "react-router";
+import { Link, useNavigate, useOutletContext } from "react-router";
 import { supabase } from "../../services/createClient";
 import { hashPassword } from "../../utils/utils";
 import FormInputs from "./FormInputs";
@@ -21,7 +21,7 @@ export default function Create() {
   const [isUsernamesMatched, setIsUsernamesMatched] = useState(false);
 
   const navigate = useNavigate();
-
+  const {setIsLoggedIn} = useOutletContext();
   const handleChange = e => {
     setFormInputs(prev => ({
       ...prev,
@@ -74,6 +74,7 @@ export default function Create() {
       });
 
       localStorage.setItem("username", formInputs.username);
+      setIsLoggedIn(true);
 
       navigate("/");
     } catch (error) {

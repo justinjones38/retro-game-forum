@@ -3,6 +3,7 @@ import styles from "./Login.module.css"
 import { Link, useNavigate } from "react-router";
 import FormInputs from "./FormInputs";
 import { supabase } from "../../services/createClient";
+import { useOutletContext } from "react-router";
 
 export default function Login() {
   const [formInputs, setFormInputs] = useState({
@@ -13,6 +14,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const {setIsLoggedIn} = useOutletContext()
 
   const handleChange = e => {
     setFormInputs(prev => ({
@@ -37,6 +39,7 @@ export default function Login() {
       }
 
       localStorage.setItem("username", formInputs.username)
+      setIsLoggedIn(true);
       navigate("/");
     } catch(error) {
       setError(true)

@@ -1,38 +1,46 @@
 import { useState } from "react"
-import styles from "./AccountSetup.module.css"
+import styles from "./Login.module.css"
 import { Link } from "react-router";
-
+import FormInputs from "./FormInputs";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [formInputs, setFormInputs] = useState({
+    username: "",
+    password: ""
+  })
 
+  const handleChange = e => {
+    setFormInputs(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }))
+  }
 
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>Login</h2>
       <form className={styles.form}>
-        <label htmlFor="email" className={styles.label}>Email</label>
-        <input 
-          type="email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
-          id="email" 
-          placeholder="abc@email.com" 
-          className={styles.input}
-          required
-        />
+        <FormInputs
+          name="username"
+          type="text"
+          val={formInputs.username}
+          handleChange={handleChange}
+          id="username"
+          placeholder="abc123"
+        >
+        Username
+        </FormInputs>
 
-        <label htmlFor="password" className={styles.label}>Password</label>
-        <input 
-          type="password" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-          id="password" 
-          placeholder="******" 
-          className={styles.input}
-          required
-        />
+        <FormInputs
+          name="password"
+          type="text"
+          val={formInputs.password}
+          handleChange={handleChange}
+          id="password"
+          placeholder="********"
+        >
+        Password
+        </FormInputs>
         <button className={styles.btn}>Login</button>
       </form>
 

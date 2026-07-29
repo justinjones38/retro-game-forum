@@ -11,28 +11,13 @@
   margin-top: 1em;
 }
 
-.label {
-  font-size: 1.06rem;
-}
-
-.input {
-  font-size: 1.2rem;
-  padding: 0.5em 0.25em;
-  width: 100%;
-  margin-bottom: 0.75em;
-}
-
-.input:last-of-type {
-  margin-bottom: 1.5em;
-}
-
 .btn {
   display: block;
   font-size: 1.05rem;
   width: 60%;
   max-width: 180px;
   padding: 0.8em 1.5em;
-  margin: 0 auto 1em;
+  margin: 1em auto;
   background-color: var(--primary-btn-bg-color);
   color: var(--primary-btn-color);
   transition: 0.3s background-color;

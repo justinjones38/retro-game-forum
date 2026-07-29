@@ -3,12 +3,13 @@ import { IoLogoGameControllerA } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
 import { Link, NavLink } from "react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useWindowWidth from "../hooks/useWindowWidth";
 
 export default function Navbar() {
   const [isMenuShown, setIsMenuShown] = useState(false);
   const {windowWidth} = useWindowWidth();
+
 
   return (
     <nav>

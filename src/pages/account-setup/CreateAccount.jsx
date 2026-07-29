@@ -1,16 +1,20 @@
 import { useState } from "react";
-import styles from "./AccountSetup.module.css";
+import styles from "./CreateAccount.module.css";
 import { Link, useNavigate } from "react-router";
 import { supabase } from "../../services/createClient";
 import { hashPassword } from "../../utils/utils";
+import FormInputs from "./FormInputs";
 
 export default function Create() {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [formInputs, setFormInputs] = useState({
+    email: "",
+    username: "",
+    password: "",
+    confirmPassword: ""
+  })
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [isPasswordsMatched, setIsPasswordsMatched] = useState(false);
   const [isInputsCompleted, setInputsCompleted] = useState(false);
   const [isEmailsMatched, setIsEmailsMatched] = useState(false);
@@ -18,15 +22,25 @@ export default function Create() {
 
   const navigate = useNavigate();
 
+  const handleChange = e => {
+    setFormInputs(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }))
+  }
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    if (!email || !username || !password || !confirmPassword) {
+    if (!formInputs.email || !formInputs.username || !formInputs.password || !formInputs.confirmPassword) {
       setIsInputsCompleted(true);
+      setLoading(false);
       return;
     }
-    if (password !== confirmPassword) {
+    if (formInputs.password !== formInputs.confirmPassword) {
       setIsPasswordsMatched(true);
+      setLoading(false);
       return;
     }
 
@@ -42,28 +56,30 @@ export default function Create() {
       const emails = data.map((item) => item.email);
       const users = data.map((item) => item.email);
 
-      if (emails.includes(email)) {
+      if (emails.includes(formInputs.email)) {
         setIsEmailsMatched(true);
+        setLoading(false);
         return;
       }
-      if (users.includes(username)) {
+      if (users.includes(formInputs.username)) {
         setIsUsernamesMatched(true);
+        setLoading(false);
         return;
       }
 
       await supabase.from("users").insert({
-        email,
-        password: hashPassword(password),
-        username,
+        email: formInputs.email,
+        password: hashPassword(formInputs.password),
+        username: formInputs.username,
       });
 
-      localStorage.setItem("username", username);
+      localStorage.setItem("username", formInputs.username);
 
       navigate("/");
     } catch (error) {
       setError(true);
     } finally {
-      setLoading(true);
+      setLoading(false);
     }
   };
 
@@ -80,60 +96,50 @@ export default function Create() {
         {isUsernamesMatched ? (
           <p className={styles.alert}>Username already used</p>
         ) : null}
-        <label htmlFor="email" className={styles.label}>
-          Email
-        </label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          id="email"
-          placeholder="abc@email.com"
-          className={styles.input}
-          required
-        />
 
-        <label htmlFor="name" className={styles.label}>
-          Username
-        </label>
-        <input
+        <FormInputs
+          name="email"
+          type="email"
+          val={formInputs.email}
+          handleChange={handleChange}
+          placeholder="abc@email.com"
+        >
+          Email
+        </FormInputs>
+
+        <FormInputs
+          name="username"
           type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          id="name"
+          val={formInputs.username}
+          handleChange={handleChange}
           placeholder="abc123"
-          className={styles.input}
-          required
-        />
+        >
+        Username
+        </FormInputs>
 
         {isPasswordsMatched ? (
           <p className={styles.alert}>Passwords do not match</p>
         ) : null}
-        <label htmlFor="password" className={styles.label}>
-          Password
-        </label>
-        <input
+        <FormInputs
+          name="password"
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          id="password"
-          placeholder="******"
-          className={styles.input}
-          required
-        />
+          val={formInputs.password}
+          handleChange={handleChange}
+          placeholder="********"
+        >
+        Password
+        </FormInputs>
 
-        <label htmlFor="confirmPassword" className={styles.label}>
-          Confirm Password
-        </label>
-        <input
+        <FormInputs
+          name="confirmPassword"
           type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          id="confirmPassword"
-          placeholder="******"
-          className={styles.input}
-          required
-        />
+          val={formInputs.confirmPasswordpassword}
+          handleChange={handleChange}
+          placeholder="********"
+        >
+        Confirm Password
+        </FormInputs>
+
         <button className={styles.btn} disabled={loading}>
           {loading ? "Creating Account" : "Create Account"}
         </button>

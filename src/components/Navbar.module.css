@@ -70,16 +70,18 @@ nav {
   gap: 2em;
 }
 
-.navItem {
+.navLink, .navBtn {
   font-size: 1.5rem;
-}
-
-.navLink {
   color: var(--primary-text-color);
 }
 
 .navLink:focus, .navLink:hover {
   border-bottom: 4px solid var(--navbar-border-color);
+}
+
+.navBtn {
+  border: none;
+  background-color: transparent;
 }
 
 

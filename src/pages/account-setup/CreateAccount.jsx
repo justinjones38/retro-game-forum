@@ -3,7 +3,7 @@ import styles from "./CreateAccount.module.css";
 import { Link, useNavigate, useOutletContext } from "react-router";
 import { supabase } from "../../services/createClient";
 import { hashPassword } from "../../utils/utils";
-import FormInputs from "./FormInputs";
+import FormInputs from "../../components/FormInputs";
 
 export default function Create() {
   const [formInputs, setFormInputs] = useState({

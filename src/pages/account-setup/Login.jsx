@@ -1,7 +1,7 @@
 import { useState } from "react"
 import styles from "./Login.module.css"
 import { Link, useNavigate } from "react-router";
-import FormInputs from "./FormInputs";
+import FormInputs from "../../components/FormInputs";
 import { supabase } from "../../services/createClient";
 import { useOutletContext } from "react-router";
 

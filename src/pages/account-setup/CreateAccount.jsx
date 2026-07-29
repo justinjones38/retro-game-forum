@@ -69,7 +69,7 @@ export default function Create() {
 
       await supabase.from("users").insert({
         email: formInputs.email,
-        password: hashPassword(formInputs.password),
+        password: formInputs.password,
         username: formInputs.username,
       });
 

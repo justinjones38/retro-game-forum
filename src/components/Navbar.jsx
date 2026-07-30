@@ -6,19 +6,20 @@ import { Link, NavLink } from "react-router";
 import { useEffect, useState } from "react";
 import useWindowWidth from "../hooks/useWindowWidth";
 
-export default function Navbar({isLoggedIn, setIsLoggedIn}) {
+export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
   const [isMenuShown, setIsMenuShown] = useState(false);
-  const {windowWidth} = useWindowWidth();
-  const [username, setUsername] = useState((localStorage.getItem("username")) || "");
-  console.log(username)
+  const { windowWidth } = useWindowWidth();
+  const [username, setUsername] = useState(
+    localStorage.getItem("username") || "",
+  );
+  console.log(username);
 
   const handleLogOut = () => {
     setIsMenuShown(false);
     setIsLoggedIn(false);
     setUsername(null);
-    localStorage.setItem("username", JSON.stringify(null))
-  }
-
+    localStorage.setItem("username", JSON.stringify(null));
+  };
 
   return (
     <nav>
@@ -45,51 +46,63 @@ export default function Navbar({isLoggedIn, setIsLoggedIn}) {
             />
             <ul className={styles.navList}>
               <li className={styles.navItem}>
-                <NavLink 
-                  to="#" 
-                  className={({isActive}) => isActive ? `${styles.navLink} ${styles.active}` : `${styles.navLink}`}
+                <NavLink
+                  to="#"
+                  className={({ isActive }) =>
+                    isActive
+                      ? `${styles.navLink} ${styles.active}`
+                      : `${styles.navLink}`
+                  }
                   onClick={() => setIsMenuShown(false)}
-                  >
-                    
+                >
                   My Posts
                 </NavLink>
               </li>
               <li className={styles.navItem}>
-                <NavLink 
-                  to="#" 
-                  className={({isActive}) => isActive ? `${styles.navLink} ${styles.active}` : `${styles.navLink}`}
+                <NavLink
+                  to="#"
+                  className={({ isActive }) =>
+                    isActive
+                      ? `${styles.navLink} ${styles.active}`
+                      : `${styles.navLink}`
+                  }
                   onClick={() => setIsMenuShown(false)}
-                  >
-                    
+                >
                   Create New Post
                 </NavLink>
               </li>
               <li className={styles.navItem}>
-                <NavLink 
-                  to="#" 
-                  className={({isActive}) => isActive ? `${styles.navLink} ${styles.active}` : `${styles.navLink}`}
+                <NavLink
+                  to="#"
+                  className={({ isActive }) =>
+                    isActive
+                      ? `${styles.navLink} ${styles.active}`
+                      : `${styles.navLink}`
+                  }
                   onClick={() => setIsMenuShown(false)}
-                  >
-                    
+                >
                   My Account
                 </NavLink>
               </li>
-              {!isLoggedIn ? 
               <li className={`${styles.navItem} ${styles.loginBtn}`}>
-                <NavLink 
-                  to="login" 
-                  className={({isActive}) => isActive ? `${styles.navLink} ${styles.active}` : `${styles.navLink}`}
-                  onClick={() => setIsMenuShown(false)}
+                {!isLoggedIn ? (
+                  <NavLink
+                    to="login"
+                    className={({ isActive }) =>
+                      isActive
+                        ? `${styles.navLink} ${styles.active}`
+                        : `${styles.navLink}`
+                    }
+                    onClick={() => setIsMenuShown(false)}
                   >
-                    
-                  Log in
-                </NavLink>
-              </li> :
-              <li className={`${styles.navItem} ${styles.loginBtn}`}>
-                  <button onClick={handleLogOut} className={styles.navBtn}>Log Out</button>
+                    Log in
+                  </NavLink>
+                ) : (
+                  <button onClick={handleLogOut} className={styles.navBtn}>
+                    Log Out
+                  </button>
+                )}
               </li>
-              
-            }
             </ul>
           </div>
         </div>

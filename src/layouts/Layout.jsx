@@ -1,6 +1,6 @@
 import styles from "./Layout.module.css"
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer"
+import Navbar from "../components/navbar/Navbar"
+import Footer from "../components/footer/Footer"
 import { Outlet } from "react-router"
 import { useState } from "react"
 

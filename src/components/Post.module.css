@@ -8,6 +8,16 @@
   display: flex;
 }
 
+.leftItem {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.time {
+  order: -1;
+}
+
 .time, .author {
   font-size: 0.85rem;
   color: var(--faded-text-color);

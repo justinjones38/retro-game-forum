@@ -43,7 +43,7 @@ export default function Home() {
 
   return (
     <section className={styles.container}>
-      {isLoggedIn ? <h2 className={styles.title}>Hello {username}! Here are some great recent posts</h2> : null}
+      {isLoggedIn ? <h2 className={styles.title}>Welcome {username}!</h2> : null}
       {loading ? <Loading /> : null}
   
       {!loading && !error && posts ? 

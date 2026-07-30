@@ -1,7 +1,7 @@
 import { useState } from "react"
 import styles from "./Login.module.css"
 import { Link, useNavigate } from "react-router";
-import FormInputs from "../../components/FormInputs";
+import AccountFormInputs from "../../components/AccountFormInputs";
 import { supabase } from "../../services/createClient";
 import { useOutletContext } from "react-router";
 
@@ -55,7 +55,7 @@ export default function Login() {
       <h2 className={styles.title}>Login</h2>
       {error ? <p className={styles.alert}>Email and/or Password is not correct</p> : null}
       <form className={styles.form} onSubmit={handleSubmit}>
-        <FormInputs
+        <AccountFormInputs
           name="username"
           type="text"
           val={formInputs.username}
@@ -64,9 +64,9 @@ export default function Login() {
           placeholder="abc123"
         >
         Username
-        </FormInputs>
+        </AccountFormInputs>
 
-        <FormInputs
+        <AccountFormInputs
           name="password"
           type="password"
           val={formInputs.password}
@@ -75,7 +75,7 @@ export default function Login() {
           placeholder="********"
         >
         Password
-        </FormInputs>
+        </AccountFormInputs>
         <button className={styles.btn} disabled={loading}> {loading ? "Logging in" : "Login"}</button>
       </form>
 

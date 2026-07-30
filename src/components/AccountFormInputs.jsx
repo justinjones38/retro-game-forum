@@ -1,7 +1,7 @@
-import styles from "./FormInputs.module.css"
+import styles from "./AccountFormInputs.module.css"
 
 
-export default function FormInputs({name, type, val, handleChange, placeholder, children}) {
+export default function AccountFormInputs({name, type, val, handleChange, placeholder, children}) {
   return (
     <div className={styles.formItem}>
         <label htmlFor={name} className={styles.label}>

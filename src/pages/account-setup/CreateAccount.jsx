@@ -3,7 +3,7 @@ import styles from "./CreateAccount.module.css";
 import { Link, useNavigate, useOutletContext } from "react-router";
 import { supabase } from "../../services/createClient";
 import { hashPassword } from "../../utils/utils";
-import FormInputs from "../../components/FormInputs";
+import AccountFormInputs from "../../components/AccountFormInputs";
 import Button from "../../components/buttons/Button";
 
 export default function Create() {
@@ -99,7 +99,7 @@ export default function Create() {
           <p className={styles.alert}>Username already used</p>
         ) : null}
 
-        <FormInputs
+        <AccountFormInputs
           name="email"
           type="email"
           val={formInputs.email}
@@ -107,9 +107,9 @@ export default function Create() {
           placeholder="abc@email.com"
         >
           Email
-        </FormInputs>
+        </AccountFormInputs>
 
-        <FormInputs
+        <AccountFormInputs
           name="username"
           type="text"
           val={formInputs.username}
@@ -117,12 +117,12 @@ export default function Create() {
           placeholder="abc123"
         >
         Username
-        </FormInputs>
+        </AccountFormInputs>
 
         {isPasswordsMatched ? (
           <p className={styles.alert}>Passwords do not match</p>
         ) : null}
-        <FormInputs
+        <AccountFormInputs
           name="password"
           type="password"
           val={formInputs.password}
@@ -130,9 +130,9 @@ export default function Create() {
           placeholder="********"
         >
         Password
-        </FormInputs>
+        </AccountFormInputs>
 
-        <FormInputs
+        <AccountFormInputs
           name="confirmPassword"
           type="password"
           val={formInputs.confirmPasswordpassword}
@@ -140,7 +140,7 @@ export default function Create() {
           placeholder="********"
         >
         Confirm Password
-        </FormInputs>
+        </AccountFormInputs>
 
         <Button disabled={loading}>
           {loading ? "Creating Account" : "Create Account"}

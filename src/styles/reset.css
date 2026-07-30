@@ -24,12 +24,12 @@ img {
   max-width: 100%;
 }
 
-img, input {
+img, input, textarea {
   display: block;
 }
 
 
-input, a, button {
+input, a, button, textarea {
   font-family: inherit;
 }
 

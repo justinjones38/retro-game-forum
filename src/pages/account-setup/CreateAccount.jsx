@@ -4,6 +4,7 @@ import { Link, useNavigate, useOutletContext } from "react-router";
 import { supabase } from "../../services/createClient";
 import { hashPassword } from "../../utils/utils";
 import FormInputs from "../../components/FormInputs";
+import Button from "../../components/buttons/Button";
 
 export default function Create() {
   const [formInputs, setFormInputs] = useState({
@@ -141,9 +142,9 @@ export default function Create() {
         Confirm Password
         </FormInputs>
 
-        <button className={styles.btn} disabled={loading}>
+        <Button disabled={loading}>
           {loading ? "Creating Account" : "Create Account"}
-        </button>
+        </Button>
       </form>
 
       <p className={styles.description}>

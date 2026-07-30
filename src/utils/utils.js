@@ -8,7 +8,6 @@ export function hashPassword(word) {
 export function getTimeDiff(timestamp) {
   const now = new Date();
   const uploadedDate = new Date(timestamp);
-  console.log(now, uploadedDate);
   const timeDiff = now.getTime() - uploadedDate.getTime();
   const oneMinute = 1000 * 60;
   const oneHour = oneMinute * 60;
@@ -20,7 +19,6 @@ export function getTimeDiff(timestamp) {
   }
 
   if (timeDiff >= oneHour) {
-    console.log(timeDiff, oneHour)
     const hourDiff = Math.floor(timeDiff / oneHour);
     return hourDiff === 1 ? `${hourDiff} hour` : `${hourDiff} hours`;
   }

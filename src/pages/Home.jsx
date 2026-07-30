@@ -18,7 +18,7 @@ export default function Home() {
         setLoading(true)
         const {data, error} = await supabase
           .from("posts")
-          .select()
+          .select(`*, users(*)`)
           .order("created_at", {ascending: false})
 
         if(error) {
@@ -26,6 +26,7 @@ export default function Home() {
         }
 
         setPosts(data)
+        console.log(data);
       } catch(error) {
         console.log("error, cannot fetch data")
       } finally {

@@ -80,7 +80,7 @@ export default function Login() {
       </form>
 
       <p className={styles.description}>
-        Don't have an account. <Link to="/create">Create new account here</Link>
+        Don't have an account. <Link to="/create-account">Create new account here</Link>
       </p>
     </section>
   )

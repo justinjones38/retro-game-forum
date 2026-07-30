@@ -10,15 +10,15 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
   const [isMenuShown, setIsMenuShown] = useState(false);
   const { windowWidth } = useWindowWidth();
   const [username, setUsername] = useState(
-    localStorage.getItem("username") || "",
+    (localStorage.getItem("username")),
   );
-  console.log(username);
+  console.log(Boolean(username));
 
   const handleLogOut = () => {
     setIsMenuShown(false);
     setIsLoggedIn(false);
     setUsername(null);
-    localStorage.setItem("username", JSON.stringify(null));
+    localStorage.removeItem("username");
   };
 
   return (
@@ -60,7 +60,7 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
               </li>
               <li className={styles.navItem}>
                 <NavLink
-                  to="#"
+                  to="create-post"
                   className={({ isActive }) =>
                     isActive
                       ? `${styles.navLink} ${styles.active}`

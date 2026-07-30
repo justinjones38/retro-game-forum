@@ -100,8 +100,8 @@ nav {
     gap: 2.5em;
   }
 
-  .navItem {
-    font-size: 1.1rem;
+  .navLink, .navBtn {
+    font-size: 1.5rem;
     align-items: center;
   }
 }

@@ -9,8 +9,16 @@ export default function Home() {
   const username = localStorage.getItem("username");
   const {isLoggedIn} = useOutletContext();
   const [posts, setPosts] = useState(null);
+  const [workingPosts, setWorkingPosts] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [input, setInput] = useState("");
+
+  const handleChange = (e) => {
+    setInput(e.target.value);
+    setWorkingPosts(posts.filter(item => item.title.toLowerCase().includes(e.target.value.toLowerCase())));
+  }
+  console.log(input);
 
   useEffect(() => {
     const fetchData = async() => {
@@ -26,7 +34,8 @@ export default function Home() {
         }
 
         setPosts(data)
-        console.log(data);
+        setWorkingPosts(data);
+
       } catch(error) {
         console.log("error, cannot fetch data")
       } finally {
@@ -37,7 +46,6 @@ export default function Home() {
     fetchData();
   }, [])
 
-  console.log(posts);
   
 
 
@@ -45,10 +53,27 @@ export default function Home() {
     <section className={styles.container}>
       {isLoggedIn ? <h2 className={styles.title}>Welcome {username}!</h2> : null}
       {loading ? <Loading /> : null}
-  
-      {!loading && !error && posts ? 
+      <div className={styles.contentInputs}>
+        <input 
+          type="text"
+          placeholder="Search posts for title"
+          value={input}
+          onChange={handleChange}
+          aria-label="Search posts for title"
+          className={styles.input}
+        />
+        <select className={styles.select}>
+          <option>Creation Date</option>
+          <option>Likes Count</option>
+        </select>
+      </div>
+
+
+      {!loading && !error && posts && workingPosts?.length ===  0 ?
+        <p className={styles.alert}>No forums available</p> : null}
+      {!loading && !error && workingPosts ? 
       <ul className={styles.postList}>
-        {posts.map(post => (
+        {workingPosts.map(post => (
           <Post key={post.id} post={post} />
         ))}
       </ul> : null}

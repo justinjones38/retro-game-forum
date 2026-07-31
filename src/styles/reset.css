@@ -37,6 +37,6 @@ a {
   text-decoration: none;
 }
 
-button, svg {
+button, svg, select, option {
   cursor: pointer;
 }

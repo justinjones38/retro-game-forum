@@ -4,6 +4,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdClose } from "react-icons/io";
 import { Link, NavLink } from "react-router";
 import { useEffect, useState } from "react";
+import Modal from "../modals/Modal";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 export default function Navbar({ isLoggedIn, setIsLoggedIn }) {

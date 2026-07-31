@@ -2,7 +2,7 @@ import { useOutletContext } from "react-router";
 import styles from "./Home.module.css"
 import { useEffect, useState } from "react";
 import { supabase } from "../services/createClient";
-import Post from "../components/Post";
+import Post from "../components/posts/Post";
 import Loading from "../components/Loading";
 
 export default function Home() {

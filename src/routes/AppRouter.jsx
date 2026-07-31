@@ -5,6 +5,7 @@ import Login from "../pages/account-setup/Login";
 import CreateAccount from "../pages/account-setup/CreateAccount";
 import AuthLogin from "../components/AuthLogin";
 import CreatePost from "../pages/CreatePost";
+import MyPosts from "../pages/MyPosts";
 
 export default function AppRouter() {
   return (
@@ -16,6 +17,7 @@ export default function AppRouter() {
           <Route path="create-account" element={<CreateAccount />} />
           <Route element={<AuthLogin />}>
             <Route path="create-post" element={<CreatePost />} />
+            <Route path="my-posts" element={<MyPosts />} />
           </Route>
         </Route>
       </Routes>

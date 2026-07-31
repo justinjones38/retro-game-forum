@@ -1,6 +1,6 @@
 import styles from "./Post.module.css"
 import { FaArrowCircleUp } from "react-icons/fa";
-import { getTimeDiff } from "../utils/utils";
+import { getTimeDiff } from "../../utils/utils";
 import { Link } from "react-router";
 
 export default function Post({post}) {

@@ -47,7 +47,7 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
             <ul className={styles.navList}>
               <li className={styles.navItem}>
                 <NavLink
-                  to="#"
+                  to="my-posts"
                   className={({ isActive }) =>
                     isActive
                       ? `${styles.navLink} ${styles.active}`

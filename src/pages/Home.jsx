@@ -18,7 +18,11 @@ export default function Home() {
     setInput(e.target.value);
     setWorkingPosts(posts.filter(item => item.title.toLowerCase().includes(e.target.value.toLowerCase())));
   }
-  console.log(input);
+
+  const handleLikePost = id => {
+    const likedPost = workingPosts.find(post => post.id === id);
+    console.log(likedPost);
+  }
 
   useEffect(() => {
     const fetchData = async() => {
@@ -74,7 +78,7 @@ export default function Home() {
       {!loading && !error && workingPosts ? 
       <ul className={styles.postList}>
         {workingPosts.map(post => (
-          <Post key={post.id} post={post} />
+          <Post key={post.id} post={post} handleLikePost={handleLikePost} />
         ))}
       </ul> : null}
     </section>

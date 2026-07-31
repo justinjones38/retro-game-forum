@@ -15,7 +15,7 @@ export function getTimeDiff(timestamp) {
 
   if (timeDiff >= oneDay) {
     const dayDiff = Math.floor(timeDiff / oneDay);
-    return dayDiff === 1 ? `${dayDiff} hour` : `${dayDiff} hours`;
+    return dayDiff === 1 ? `${dayDiff} day` : `${dayDiff} days`;
   }
 
   if (timeDiff >= oneHour) {

@@ -3,7 +3,8 @@ import { FaArrowCircleUp } from "react-icons/fa";
 import { getTimeDiff } from "../../utils/utils";
 import { Link } from "react-router";
 
-export default function Post({post}) {
+export default function Post({post, handleLikePost}) {
+
   return (
     <li className={styles.postItem}>
       <div className={styles.leftItem}>
@@ -14,8 +15,8 @@ export default function Post({post}) {
         <p className={styles.author}>Uploaded by {post.users.username}</p>
       </div>
       <div className={styles.rightItem}>
-        <FaArrowCircleUp className={styles.icon} />
-        <p className={styles.likesCount}>153 upvotes</p>
+        <button className={styles.btn} onClick={() => handleLikePost(post.id)}><FaArrowCircleUp className={styles.icon} /></button>
+        <p className={styles.likesCount}>{post.likes} {post.likes === 1 ? "like" : "likes"}</p>
       </div>
     </li>
   )

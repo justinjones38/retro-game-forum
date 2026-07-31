@@ -11,7 +11,8 @@ export default function Home() {
   const [posts, setPosts] = useState(null);
   const [workingPosts, setWorkingPosts] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
+  const [errorLike, setErrorLike] = useState("")
   const [input, setInput] = useState("");
 
   const handleChange = (e) => {
@@ -19,9 +20,31 @@ export default function Home() {
     setWorkingPosts(posts.filter(item => item.title.toLowerCase().includes(e.target.value.toLowerCase())));
   }
 
-  const handleLikePost = id => {
-    const likedPost = workingPosts.find(post => post.id === id);
-    console.log(likedPost);
+  const handleLikePost =  async(id) => {
+    try {
+      const oldWorkingPosts = [...workingPosts];
+
+      setWorkingPosts(prev => prev.map(prevItem => (
+        prevItem.id === id ? 
+          ({...prevItem, likes: prevItem.likes + 1})
+          : prevItem
+      )))
+
+      const likedPost = workingPosts.find(item => item.id === id);
+      const {error} = await supabase
+        .from("posts")
+        .update({"likes": likedPost.likes + 1})
+        .eq("id", id)
+
+      if(error) {
+        setWorkingPosts(oldWorkingPosts);
+        throw new Error(`Cannot like post now. Please try again later`)
+      }
+    } catch(error) {
+      setErrorLike(error.message);
+    }
+
+
   }
 
   useEffect(() => {
@@ -41,7 +64,7 @@ export default function Home() {
         setWorkingPosts(data);
 
       } catch(error) {
-        console.log("error, cannot fetch data")
+        setError(error.message)
       } finally {
         setLoading(false);
       }

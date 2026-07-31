@@ -1,0 +1,36 @@
+.postItem {
+  background-color: var(--card-bg-color);
+  width: 98%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0.25em 0.5em;
+  border-radius: 6px;
+  display: flex;
+}
+
+.leftItem {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.time {
+  order: -1;
+}
+
+.time, .author {
+  font-size: 0.85rem;
+  color: var(--faded-text-color);
+}
+
+.rightItem {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  font-size: 1.4rem;
+}

@@ -1,0 +1,29 @@
+.container {
+  width: 85%;
+  margin: 0 auto;
+  max-width: 350px;
+}
+
+.alert {
+  color: var(--alert-text-color);
+  text-align: center;
+  line-height: 1.2;
+  margin-top: 1em;
+}
+
+
+
+.description {
+  text-align: center;
+}
+
+.description > a {
+  color: var(--link-text-color);
+  transition: 0.3s color 0.3s border-bottom;
+  border-bottom: 1px solid var(--link-text-color);
+}
+
+.description > a:hover, .description > a:focus {
+  color: var(--link-text-hover-color);
+  border-bottom: 1px solid var(--link-text-hover-color);
+}

@@ -1,0 +1,42 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  font-family: "Inter", sans-serif;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  padding-left: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+img, input, textarea {
+  display: block;
+}
+
+
+input, a, button, textarea {
+  font-family: inherit;
+}
+
+a {
+  text-decoration: none;
+}
+
+button, svg, select, option {
+  cursor: pointer;
+}

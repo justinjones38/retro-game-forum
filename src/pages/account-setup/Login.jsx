@@ -12,7 +12,7 @@ export default function Login() {
   })
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const {setIsLoggedIn} = useOutletContext()
 
@@ -35,14 +35,14 @@ export default function Login() {
         .single()
 
       if(error) {
-        throw new Error("Cannot fetch data")
+        throw new Error("Email and/or password is not correct")
       }
 
       localStorage.setItem("username", formInputs.username)
       setIsLoggedIn(true);
       navigate("/");
     } catch(error) {
-      setError(true)
+      setError(error.message)
     } finally {
       setLoading(false)
     }
@@ -53,7 +53,7 @@ export default function Login() {
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>Login</h2>
-      {error ? <p className={styles.alert}>Email and/or Password is not correct</p> : null}
+      {error ? <p className={styles.alert}>{error}</p> : null}
       <form className={styles.form} onSubmit={handleSubmit}>
         <AccountFormInputs
           name="username"

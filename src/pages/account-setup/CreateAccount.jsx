@@ -15,9 +15,8 @@ export default function Create() {
   })
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [isPasswordsMatched, setIsPasswordsMatched] = useState(false);
-  const [isInputsCompleted, setInputsCompleted] = useState(false);
   const [isEmailsMatched, setIsEmailsMatched] = useState(false);
   const [isUsernamesMatched, setIsUsernamesMatched] = useState(false);
 
@@ -34,18 +33,17 @@ export default function Create() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    if (!formInputs.email || !formInputs.username || !formInputs.password || !formInputs.confirmPassword) {
-      setIsInputsCompleted(true);
-      setLoading(false);
-      return;
-    }
-    if (formInputs.password !== formInputs.confirmPassword) {
-      setIsPasswordsMatched(true);
-      setLoading(false);
-      return;
-    }
+
 
     try {
+      if (!formInputs.email || !formInputs.username || !formInputs.password || !formInputs.confirmPassword) {
+        throw new Error("Please complete all fields");
+
+      }
+      if (formInputs.password !== formInputs.confirmPassword) {
+        throw new Error("Passwords do not match");
+      }
+
       const { data, error } = await supabase
         .from("users")
         .select("email, username");
@@ -55,17 +53,13 @@ export default function Create() {
       }
 
       const emails = data.map((item) => item.email);
-      const users = data.map((item) => item.email);
+      const users = data.map((item) => item.username);
 
       if (emails.includes(formInputs.email)) {
-        setIsEmailsMatched(true);
-        setLoading(false);
-        return;
+        throw new Error("Email already used")
       }
       if (users.includes(formInputs.username)) {
-        setIsUsernamesMatched(true);
-        setLoading(false);
-        return;
+        throw new Error("Username already used")
       }
 
       await supabase.from("users").insert({
@@ -79,7 +73,7 @@ export default function Create() {
 
       navigate("/");
     } catch (error) {
-      setError(true);
+      setError(error.message);
     } finally {
       setLoading(false);
     }
@@ -89,14 +83,9 @@ export default function Create() {
     <section className={styles.container}>
       <h2 className={styles.title}>Create Account</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
-        {isInputsCompleted ? (
-          <p className={styles.alert}>Please complete all fields</p>
-        ) : null}
-        {isEmailsMatched ? (
-          <p className={styles.alert}>Email already used</p>
-        ) : null}
-        {isUsernamesMatched ? (
-          <p className={styles.alert}>Username already used</p>
+
+        {error ? (
+          <p className={styles.alert}>{error}</p>
         ) : null}
 
         <AccountFormInputs
@@ -119,9 +108,7 @@ export default function Create() {
         Username
         </AccountFormInputs>
 
-        {isPasswordsMatched ? (
-          <p className={styles.alert}>Passwords do not match</p>
-        ) : null}
+
         <AccountFormInputs
           name="password"
           type="password"

@@ -16,7 +16,11 @@ export default function Post({post, handleLikePost}) {
       </div>
       <div className={styles.rightItem}>
         <button className={styles.btn} onClick={() => handleLikePost(post.id)}><FaArrowCircleUp className={styles.icon} /></button>
-        <p className={styles.likesCount}>{post.likes} {post.likes === 1 ? "like" : "likes"}</p>
+        <p 
+          className={styles.likesCount}
+          aria-label={`${post.likes} ${post.likes ===  1 ? "like" : "likes"}`}
+        >{post.likes}
+        </p>
       </div>
     </li>
   )

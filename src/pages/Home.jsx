@@ -84,14 +84,15 @@ export default function Home() {
         <input 
           type="text"
           placeholder="Search posts for title"
+          id="title"
           value={input}
           onChange={handleChange}
           aria-label="Search posts for title"
           className={styles.input}
         />
-        <select className={styles.select}>
-          <option>Creation Date</option>
-          <option>Likes Count</option>
+        <select className={styles.select} id="select">
+          <option value="creationDate">Creation Date</option>
+          <option value="likesCount">Likes Count</option>
         </select>
       </div>
 

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styles from "./CreatePost.module.css";
 import { Navigate, useNavigate } from "react-router";
-import { supabase } from "../services/createClient";
-import Button from "../components/buttons/Button";
+import { supabase } from "../../services/createClient";
+import Button from "../../components/buttons/Button";
 
 export default function CreatePost() {
   const username = localStorage.getItem("username");

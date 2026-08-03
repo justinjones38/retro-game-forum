@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import styles from "./MyPosts.module.css"
-import { supabase } from "../services/createClient";
+import { supabase } from "../../services/createClient";
 import { useState } from "react";
-import Loading from "../components/Loading";
-import MyPost from "../components/posts/MyPost";
+import Loading from "../../components/Loading";
+import MyPost from "../../components/posts/MyPost";
 
 export default function MyPosts() {
   const username = localStorage.getItem("username");

@@ -4,8 +4,9 @@ import Home from "../pages/Home";
 import Login from "../pages/account-setup/Login";
 import CreateAccount from "../pages/account-setup/CreateAccount";
 import AuthLogin from "../components/AuthLogin";
-import CreatePost from "../pages/CreatePost";
-import MyPosts from "../pages/MyPosts";
+import CreatePost from "../pages/posts/CreatePost";
+import MyPosts from "../pages/posts/MyPosts";
+import PostDetail from "../pages/posts/PostDetail";
 
 export default function AppRouter() {
   return (
@@ -18,6 +19,7 @@ export default function AppRouter() {
           <Route element={<AuthLogin />}>
             <Route path="create-post" element={<CreatePost />} />
             <Route path="my-posts" element={<MyPosts />} />
+            <Route path=":id" element={<PostDetail />} />
           </Route>
         </Route>
       </Routes>

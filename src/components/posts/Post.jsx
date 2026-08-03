@@ -9,7 +9,7 @@ export default function Post({post, handleLikePost}) {
     <li className={styles.postItem}>
       <div className={styles.leftItem}>
         <h3 className={styles.postTitle}>
-          <Link to="#" className={styles.titleLink}>{post.title}</Link>
+          <Link to={`${post.id}`} className={styles.titleLink}>{post.title}</Link>
           </h3>
         <p 
           className={styles.description}

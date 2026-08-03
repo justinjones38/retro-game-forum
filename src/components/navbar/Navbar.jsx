@@ -90,7 +90,7 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
                       My Account
                     </NavLink>
                   </li>
-                  <li className={`${styles.navItem} ${styles.loginBtn}`}>
+                  <li className={`${styles.navItem}`}>
                     <button onClick={handleLogOut} className={styles.navBtn}>
                       Log Out
                     </button>

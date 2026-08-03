@@ -14,9 +14,10 @@ export default function PostDetail() {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isFormEditing, setIsFormEditing] = useState(false);
+  const [textInput, setTextInput] = useState("");
 
   const username = localStorage.getItem("username");
-  console.log(username);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,6 +43,10 @@ export default function PostDetail() {
     fetchData();
   }, []);
 
+  const editTextInput = () => {
+    setIsFormEditing(true);
+  }
+
   console.log(id);
   return (
     <section className={styles.container}>
@@ -58,7 +63,10 @@ export default function PostDetail() {
               </p>
               {username === post.users.username ? (
                 <div className={styles.btnContainer}>
-                  <button className={`${styles.btn} ${styles.editBtn}`}>
+                  <button 
+                    className={`${styles.btn} ${styles.editBtn}`}
+                    onClick={editTextInput}  
+                  >
                     Edit
                   </button>
                   <button className={`${styles.btn} ${styles.deleteBtn}`}>
@@ -67,7 +75,17 @@ export default function PostDetail() {
                 </div>
               ) : null}
             </div>
-            <p className={styles.message}>{post.message}</p>
+            {!isFormEditing ? <p className={styles.message}>{post.message}</p> :
+            <form className={styles.textbox}>
+              <label className={styles.label} htmlFor="editMessage">Edit your Message</label>
+              <textarea 
+                className={styles.textarea}
+                value={textInput}
+                onChange={(e) => setTextInput(e.target.value)}
+                id="editMessage"
+              >
+              </textarea>
+            </form>}
             <button className={styles.upvoteBtn}>
               <FaArrowUp /> {' '}
               {post.likes} Upvotes</button>

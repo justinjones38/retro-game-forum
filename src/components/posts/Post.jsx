@@ -9,13 +9,13 @@ export default function Post({post, handleLikePost}) {
     <li className={styles.postItem}>
       <div className={styles.leftItem}>
         <h3 className={styles.postTitle}>
-          <Link to={`${post.id}`} className={styles.titleLink}>{post.title}</Link>
+          <Link to={`posts/${post.id}`} className={styles.titleLink}>{post.title}</Link>
           </h3>
         <p 
           className={styles.description}
           aria-label={`uploaded by ${post.users.username}, posted ${getTimeDiff(post.created_at)} ago`}
         >
-          {post.users.username} - <span>{getTimeDiff(post.created_at)}</span> ago
+          {post.users.username} - <span>{getTimeDiff(post.created_at)}</span>
         </p>
       </div>
       <div className={styles.rightItem}>

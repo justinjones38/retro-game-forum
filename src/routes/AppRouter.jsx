@@ -19,7 +19,7 @@ export default function AppRouter() {
           <Route element={<AuthLogin />}>
             <Route path="create-post" element={<CreatePost />} />
             <Route path="my-posts" element={<MyPosts />} />
-            <Route path=":id" element={<PostDetail />} />
+            <Route path="posts/:id" element={<PostDetail />} />
           </Route>
         </Route>
       </Routes>

@@ -15,14 +15,14 @@ export function getTimeDiff(timestamp) {
 
   if (timeDiff >= oneDay) {
     const dayDiff = Math.floor(timeDiff / oneDay);
-    return dayDiff === 1 ? `${dayDiff} day` : `${dayDiff} days`;
+    return dayDiff === 1 ? `${dayDiff} day ago` : `${dayDiff} days ago`;
   }
 
   if (timeDiff >= oneHour) {
     const hourDiff = Math.floor(timeDiff / oneHour);
-    return hourDiff === 1 ? `${hourDiff} hour` : `${hourDiff} hours`;
+    return hourDiff === 1 ? `${hourDiff} hour ago` : `${hourDiff} hours ago`;
   }
 
   const minDiff = Math.floor(timeDiff / oneMinute);
-  return minDiff === 1 ? `${minDiff} minutes` : `${minDiff} minutes`;
+  return minDiff === 1 ? `${minDiff} minutes ago` : `${minDiff} minutes ago`;
 }

@@ -7,66 +7,99 @@ export default function Replies({ id }) {
   const [repliesList, setRepliesList] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [reply, setReply] = useState("")
+  const [reply, setReply] = useState("");
+  const [accountInfo, setAccountInfo] = useState(null);
+  const username = localStorage.getItem("username");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data, error } = await supabase
-          .from("replies")
-          .select(
-            `*,
+  const fetchData = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("replies")
+        .select(
+          `*,
               users(*),
               posts(*)`,
-          )
-          .eq("post_id", id);
-        setRepliesList(data);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-    fetchData();
-  }, []);
-  console.log(repliesList);
-    const submitReply = async(e) => {
-      e.preventDefault();
-  
-      const {error} = await supabase
-        .from("replies")
-        .insert({
-          user_id: post.users.id,
-          post_id: id,
-          message: reply,
-        }) 
-  
-      setReply("");
+        )
+        .eq("post_id", id)
+        .order("created_at", {ascending: false})
+      setRepliesList(data);
+    } catch (error) {
+      console.log(error.message);
     }
+  };
 
+  const fetchuserAccount = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("users")
+        .select("*")
+        .eq("username", username)
+        .single();
+      if (error) {
+        throw new Error("Cannot fetch data");
+      }
+      setAccountInfo(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+    fetchuserAccount();
+  }, []);
+
+  console.log(repliesList);
+  const submitReply = async (e) => {
+    e.preventDefault();
+
+    const { error } = await supabase.from("replies").insert({
+      user_id: accountInfo.id,
+      post_id: id,
+      message: reply,
+    });
+
+    setReply("");
+    fetchData();
+  };
+  const getCommentsLength = () => {
+    if(!repliesList?.length) {
+      return `0 Comments`
+    } else if (repliesList.length === 1) {
+      return `1 Comment` 
+    } else {
+      return `${repliesList.length} Comments`
+    }
+  }
   return (
     <div className={styles.container}>
-        <form className={styles.form} onSubmit={submitReply}>
-          <input 
-            type="text"
-            className={styles.textInput}
-            id="text"
-            value={reply}
-            onChange={(e) => setReply(e.target.value)}
-            placeholder="Add a Comment"
-          />
-          <button>Reply</button>
-        </form>
-        <ul className={styles.repliesList}>
-          {repliesList?.length > 0 ?
-          repliesList.map(reply => (
+      <p className={styles.commentsLength}>{getCommentsLength()}</p>
+      <form className={styles.form} onSubmit={submitReply}>
+        <input
+          type="text"
+          className={styles.textInput}
+          id="text"
+          value={reply}
+          onChange={(e) => setReply(e.target.value)}
+          placeholder="Add a Comment"
+        />
+        <button className={styles.btn} disabled={!reply}>Reply</button>
+      </form>
+      <ul className={styles.repliesList}>
+        {repliesList?.length > 0 ? (
+          repliesList.map((reply) => (
             <li key={reply.id} className={styles.listItem}>
               <p className={styles.author}>
-                {reply.users.username} <span>{getTimeDiff(reply.created_at)}</span>
+                {reply.users.username} - {" "}
+                <span>{getTimeDiff(reply.created_at)}</span>
               </p>
               <p className={styles.message}>{reply.message}</p>
             </li>
-          )) : <p>No comments</p>} 
-        </ul>
-        
+          ))
+        ) : (
+          null
+        )}
+      </ul>
     </div>
   );
 }

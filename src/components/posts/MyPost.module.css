@@ -1,36 +1,87 @@
 .postItem {
   background-color: var(--card-bg-color);
   width: 98%;
-  max-width: 600px;
+  max-width: 750px;
   margin: 0 auto;
-  padding: 0.25em 0.5em;
+  padding: 0.75em 1em;
   border-radius: 6px;
   display: flex;
+  justify-content: space-between;
+  gap: 1.5em;
 }
 
-.leftItem {
-  display: flex;
-  flex-direction: column;
+.postLink {
+  color: var(--primary-text-color);
+  border-bottom: 2px solid var(--post-border-color);
+  transition: 0.3s color;
+}
 
+.postLink:focus {
+  color: var(--primary-text-hover-color);
 }
 
 .time {
-  order: -1;
-}
-
-.time, .author {
-  font-size: 0.85rem;
-  color: var(--faded-text-color);
+  font-size: 0.9rem;
+  color: var(--faded-text-color)
 }
 
 .rightItem {
-  margin-left: auto;
   display: flex;
-  flex-direction: column;
+  gap: 1.25em;
   justify-content: center;
   align-items: center;
 }
 
-.icon {
-  font-size: 1.4rem;
+.likesCounter {
+ text-align: center;
+}
+
+.iconBtn {
+  font-size: 1rem;
+  background-color: transparent;
+  border: none;
+}
+
+.btnContainer {
+  display: flex;
+  justify-content: center;
+  gap: 0.5em;
+}
+
+.btn {
+  font-size: 1rem;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+}
+
+.editBtn {
+  background-color: var(--secondary-btn-color);
+  color: var(--secondary-btn-text-color);
+  transition: 0.3s background-color;
+}
+
+.editBtn:focus, .editBtn:hover {
+  background-color: var(--secondary-btn-bg-hover-color);
+}
+
+.deleteBtn {
+  background-color: var(--delete-btn-color);
+  color: var(--delete-btn-text-color);
+  transition: 0.3s deleteBtn;
+}
+
+.deleteBtn:focus, .deleteBtn:hover {
+  background-color: var(--delete-btn-hover-color);
+}
+
+.input {
+  font-size: 1rem;
+  padding: 0.5em 0.25em;
+}
+
+.textarea {
+  font-size: 1rem;
+  margin-bottom: 1em;
+  padding: 0.5em 0.25em;
 }

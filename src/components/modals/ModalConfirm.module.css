@@ -72,4 +72,8 @@
     flex-direction: row;
     justify-content: space-between;
   }
+
+  .btnConfirm {
+    order: 2;
+  }
 }

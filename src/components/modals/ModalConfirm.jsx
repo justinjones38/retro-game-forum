@@ -9,7 +9,7 @@ export default function ModalConfirm({
   return (
     <dialog className={styles.container}>
       <div className={styles.contentWrapper}>
-        <p className={styles.header}>{children}!</p>
+        <p className={styles.header}>{children}</p>
         <div className={styles.btnContainer}>
           <button
             className={`${styles.btn} ${styles.btnConfirm}`}

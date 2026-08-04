@@ -8,10 +8,10 @@ export default function ModalForm({children, handleConfirm, handleReject}) {
         {children}
         <div className={styles.btnContainer}>
           <button className={`${styles.btn} ${styles.btnConfirm}`}>
-            Yes
+            Save
           </button>
-          <button className={`${styles.btn} ${styles.btnReject}`} onClick={handleReject}>
-            No
+          <button type="button" className={`${styles.btn} ${styles.btnReject}`} onClick={handleReject}>
+            Cancel
           </button>
         </div>
       </form>

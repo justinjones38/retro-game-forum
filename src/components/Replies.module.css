@@ -1,0 +1,41 @@
+.commentsLength {
+  font-weight: 700;
+}
+
+.form {
+  display: flex;
+  gap: 0.25em;
+  margin-bottom: 1em;
+}
+
+.textInput {
+  padding: 0.75em 0.25em;
+  border-radius: 6px;
+  flex: 1;
+}
+
+.btn {
+  background-color: var(--primary-btn-bg-color);
+  flex: 0.05 0.05 75px;
+  border: none;
+  padding: 0.75em 1.5em;
+  border-radius: 6px;
+  color: var(--primary-btn-color);
+  transition: 0.3s background-color;
+}
+
+.btn:focus, .btn:hover {
+  background-color: var(--primary-btn-bg-hover-color);
+}
+
+.btn:disabled {
+  background-color: var(--primary-btn-bg-disabled-color);
+}
+
+.listItem {
+  margin-bottom: 1em;
+}
+
+.author > span {
+  font-size: var(--faded-text-color);
+}

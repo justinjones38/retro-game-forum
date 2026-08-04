@@ -2,10 +2,11 @@ import styles from "./MyPost.module.css"
 import { FaArrowUp } from "react-icons/fa";
 import { getTimeDiff } from "../../utils/utils";
 import { Link } from "react-router";
+import { useState } from "react";
+import ModalConfirm from "../modals/ModalConfirm";
 
-export default function MyPost({post, incrementLikesCounter}) {
-  console.log(post.id)
-
+export default function MyPost({post, incrementLikesCounter, deletePost}) {
+  const [isModalShown, setIsModalShown] = useState(false);
   return (
     <li className={styles.postItem}>
       <div className={styles.leftItem}>
@@ -24,8 +25,16 @@ export default function MyPost({post, incrementLikesCounter}) {
         </div>
         <div className={styles.btnContainer}>
           <button className={`${styles.btn} ${styles.editBtn}`}>Edit</button>
-          <button className={`${styles.btn} ${styles.deleteBtn}`}>Delete</button>
+          <button 
+            className={`${styles.btn} ${styles.deleteBtn}`}
+            onClick={() => setIsModalShown(true)}
+          >
+            Delete</button>
         </div>
+        {isModalShown ?
+          <ModalConfirm handleConfirm={() => deletePost(post.id)} handleReject={() => setIsModalShown(false)} >
+            Are you sure that you want to delete your post?
+          </ModalConfirm> : null}
 
       </div>
     </li>

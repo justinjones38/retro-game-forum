@@ -15,6 +15,7 @@ export default function Home() {
   const [error, setError] = useState("");
   const [errorLike, setErrorLike] = useState("")
   const [input, setInput] = useState("");
+  const [sortBy, setSortBy] = useState("created_at");
 
   const handleChange = (e) => {
     setInput(e.target.value);
@@ -51,6 +52,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async() => {
       try {
+        console.log(sortBy);
         setLoading(true)
         const {data, error} = await supabase
           .from("posts")
@@ -74,6 +76,14 @@ export default function Home() {
     fetchData();
   }, [])
 
+  useEffect(() => {
+    setWorkingPosts(prev => 
+        prev?.toSorted((a, b) => sortBy === "created_at" ?  
+          new Date(b[sortBy]) - (new Date(a[sortBy])) : 
+          b[sortBy] - a[sortBy])
+    )
+  }, [sortBy])
+
   
 
 
@@ -91,9 +101,9 @@ export default function Home() {
           aria-label="Search posts for title"
           className={styles.input}
         />
-        <select className={styles.select} id="select">
-          <option value="creationDate">Creation Date</option>
-          <option value="likesCount">Likes Count</option>
+        <select className={styles.select} id="select" onChange={(e) => setSortBy(e.target.value)}>
+          <option value="created_at">Creation Date</option>
+          <option value="likes">Likes Count</option>
         </select>
       </div>
 

@@ -97,6 +97,28 @@ export default function PostDetail() {
     }
   };
 
+  const incrementLikes = async() => {
+    try {
+      const oldPost = {...post}
+      setPost(prev => ({
+        ...prev,
+        likes: prev.likes + 1
+      }))
+
+      const {error} = await supabase
+        .from("posts")
+        .update({likes: oldPost.likes + 1})
+        .eq("id", id)
+      if(error) {
+        setPost(post)
+        throw new Error("Cannot fetch data")
+      }
+    } catch(error) {
+      console.log(error.message);
+    }
+
+  }
+
   return (
     <section className={styles.container}>
       {loading ? <Loading /> : null}
@@ -128,7 +150,7 @@ export default function PostDetail() {
               ) : null}
             </div>
             <p className={styles.message}>{post.message}</p>
-            <button className={styles.upvoteBtn}>
+            <button className={styles.upvoteBtn} onClick={incrementLikes}>
               <FaArrowUp /> {post.likes} Upvotes
             </button>
           </div>

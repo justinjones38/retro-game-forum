@@ -74,3 +74,14 @@
 .deleteBtn:focus, .deleteBtn:hover {
   background-color: var(--delete-btn-hover-color);
 }
+
+.input {
+  font-size: 1rem;
+  padding: 0.5em 0.25em;
+}
+
+.textarea {
+  font-size: 1rem;
+  margin-bottom: 1em;
+  padding: 0.5em 0.25em;
+}

@@ -4,9 +4,29 @@ import { getTimeDiff } from "../../utils/utils";
 import { Link } from "react-router";
 import { useState } from "react";
 import ModalConfirm from "../modals/ModalConfirm";
+import ModalForm from "../modals/ModalForm";
 
-export default function MyPost({post, incrementLikesCounter, deletePost}) {
+export default function MyPost({post, incrementLikesCounter, deletePost, editPost}) {
   const [isModalShown, setIsModalShown] = useState(false);
+  const [isFormEditing, setIsFormEditing] = useState(false);
+  const [formInputs, setFormInputs] = useState({
+    title: "",
+    message: ""
+  })
+
+  const handleChange = (e) => setFormInputs(prev => ({
+    ...prev,
+    [e.target.name]: e.target.value
+  }))
+
+  const showModal = () => {
+    setIsFormEditing(true);
+    setFormInputs({
+      title: post.title,
+      message: post.message
+    })
+  }
+
   return (
     <li className={styles.postItem}>
       <div className={styles.leftItem}>
@@ -24,7 +44,10 @@ export default function MyPost({post, incrementLikesCounter, deletePost}) {
           <p className={styles.likesCount}>{post.likes}</p>
         </div>
         <div className={styles.btnContainer}>
-          <button className={`${styles.btn} ${styles.editBtn}`}>Edit</button>
+          <button 
+            className={`${styles.btn} ${styles.editBtn}`}
+            onClick={showModal}
+          >Edit</button>
           <button 
             className={`${styles.btn} ${styles.deleteBtn}`}
             onClick={() => setIsModalShown(true)}
@@ -35,7 +58,29 @@ export default function MyPost({post, incrementLikesCounter, deletePost}) {
           <ModalConfirm handleConfirm={() => deletePost(post.id)} handleReject={() => setIsModalShown(false)} >
             Are you sure that you want to delete your post?
           </ModalConfirm> : null}
+        {isFormEditing ? 
+          <ModalForm handleConfirm={e => editPost(e, post.id, formInputs.title, formInputs.message)} handleReject={() => setIsFormEditing(false)}>
+              <label htmlFor="title" className={styles.label}>Title</label>
+              <input 
+                type="text" 
+                value={formInputs.title}
+                onChange={handleChange}
+                name="title"
+                id="title"
+                className={styles.input}
+              />
+              <label htmlFor="message" className={styles.label}>Message</label>
+              <textarea
+                value={formInputs.message}
+                onChange={handleChange}
+                name="message"
+                id="message"
+                className={styles.textarea}
+                rows={4}
+              ></textarea>
 
+          </ModalForm> : null}
+        
       </div>
     </li>
   )

@@ -85,6 +85,23 @@ export default function MyPosts() {
       console.log(error.message);
     }
   };
+
+  const editPost = async (e, id, title, message) => {
+    e.preventDefault();
+    console.log(title);
+    try {
+      const {error} = await supabase
+        .from("posts")
+        .update({title, message})
+        .eq("id", id)
+      if(error) {
+        throw new Error("Cannot fetch data");
+      }
+      fetchData();
+    } catch(error) {
+      console.log(error.message);
+    }
+  }
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>My Posts</h2>
@@ -98,6 +115,7 @@ export default function MyPosts() {
               post={post}
               incrementLikesCounter={incrementLikesCounter}
               deletePost={deletePost}
+              editPost={editPost}
             />
           ))}
         </ul>

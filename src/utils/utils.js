@@ -24,5 +24,5 @@ export function getTimeDiff(timestamp) {
   }
 
   const minDiff = Math.floor(timeDiff / oneMinute);
-  return minDiff === 1 ? `${minDiff} minutes ago` : `${minDiff} minutes ago`;
+  return minDiff === 1 ? `${minDiff} minute ago` : `${minDiff} minutes ago`;
 }

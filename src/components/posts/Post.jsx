@@ -15,7 +15,7 @@ export default function Post({post, handleLikePost}) {
           className={styles.description}
           aria-label={`uploaded by ${post.users.username}, posted ${getTimeDiff(post.created_at)} ago`}
         >
-          {post.users.username} - <span>{getTimeDiff(post.created_at)}</span>
+          <Link to={`/users/${post.users.username}`}>{post.users.username}</Link> - <span>{getTimeDiff(post.created_at)}</span>
         </p>
       </div>
       <div className={styles.rightItem}>

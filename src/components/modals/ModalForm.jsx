@@ -10,7 +10,7 @@ export default function ModalForm({children, handleConfirm, handleReject}) {
           <button className={`${styles.btn} ${styles.btnConfirm}`}>
             Save
           </button>
-          <button className={`${styles.btn} ${styles.btnReject}`} onClick={handleReject}>
+          <button type="button" className={`${styles.btn} ${styles.btnReject}`} onClick={handleReject}>
             Cancel
           </button>
         </div>

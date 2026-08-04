@@ -77,6 +77,16 @@
   line-height: 1.4;
 }
 
+.imgContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.img {
+  width: 50%;
+  max-width: 150px;
+}
+
 .upvoteBtn {
   background-color: var(--primary-btn-bg-color);
   color: var(--primary-btn-color);

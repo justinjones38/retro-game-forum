@@ -5,11 +5,17 @@
 }
 
 .input {
-  padding: 0.75em 0.26em;
+  padding: 0.75em 0.25em;
   border-radius: 6px;
   width: 100%;
   margin-bottom: 1em;
   font-size: 1.1rem;
 }
 
+.imgInput {
+  width: 100%;
+  padding: 0.375em 0.25em;
+  border-radius: 6px;
+  font-size: 1.1rem;
+}
 

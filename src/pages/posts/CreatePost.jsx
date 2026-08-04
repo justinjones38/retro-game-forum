@@ -8,7 +8,8 @@ export default function CreatePost() {
   const username = localStorage.getItem("username");
   const [post, setPost] = useState({
     title: "",
-    message: ""
+    message: "",
+    imgUrl: ""
   })
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -43,6 +44,7 @@ export default function CreatePost() {
         .insert({
           title: post.title,
           message: post.message,
+          imgUrl: post.imgUrl,
           user_id: data.id
         })
 
@@ -68,7 +70,7 @@ export default function CreatePost() {
     <section className={styles.container}>
       <h2 className={styles.title}>Create New Post</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <label htmlFor="title" className={styles.label}>Title</label>
+        <label htmlFor="title" className={styles.label}>Title *</label>
         <input 
           type="text"
           value={post.title}
@@ -79,7 +81,7 @@ export default function CreatePost() {
           id="title"
           required
         />
-        <label htmlFor="message" className={styles.label}>Message</label>
+        <label htmlFor="message" className={styles.label}>Message *</label>
         <textarea 
           className={styles.textarea}
           value={post.message}
@@ -92,7 +94,17 @@ export default function CreatePost() {
           required
         >
         </textarea>
+        <label htmlFor="imgUrl"> Image URL <span>(Optional - Add the image url)</span></label>
+        <input 
+          type="text"
+          className={styles.imgInput}
+          value={post.imgUrl}
+          onChange={handleChange}
+          name="imgUrl"
+          id="imgUrl"
+        />
         <Button disabled={loading}>{loading ? "Submitting Form" : "Submit"}</Button>
+
       </form>
 
 

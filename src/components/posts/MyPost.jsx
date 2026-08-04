@@ -3,7 +3,9 @@ import { FaArrowUp } from "react-icons/fa";
 import { getTimeDiff } from "../../utils/utils";
 import { Link } from "react-router";
 
-export default function MyPost({post}) {
+export default function MyPost({post, incrementLikesCounter}) {
+  console.log(post.id)
+
   return (
     <li className={styles.postItem}>
       <div className={styles.leftItem}>
@@ -14,7 +16,10 @@ export default function MyPost({post}) {
       </div>
       <div className={styles.rightItem}>
         <div className={styles.likesCounter}>
-          <FaArrowUp className={styles.icon} />
+          <button 
+            className={styles.iconBtn}
+            onClick={() => incrementLikesCounter(post.id)}
+          ><FaArrowUp className={styles.icon} /></button>
           <p className={styles.likesCount}>{post.likes}</p>
         </div>
         <div className={styles.btnContainer}>

@@ -90,3 +90,17 @@
   background-color: var(--primary-btn-bg-hover-color);
 }
 
+
+.input {
+  font-size: 1rem;
+  padding: 0.75em 0.25em;
+  border-radius: 6px;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.textarea {
+  font-size: 1rem;
+  margin-bottom: 1em;
+  padding: 0.5em 0.25em;
+}

@@ -82,7 +82,7 @@ export default function Home() {
           new Date(b[sortBy]) - (new Date(a[sortBy])) : 
           b[sortBy] - a[sortBy])
     )
-  }, [sortBy])
+  }, [sortBy, input])
 
   
 

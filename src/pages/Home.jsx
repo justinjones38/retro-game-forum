@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../services/createClient";
 import Post from "../components/posts/Post";
 import Loading from "../components/Loading";
+import Modal from "../components/modals/ModalConfirm";
 
 export default function Home() {
   const username = localStorage.getItem("username");
@@ -95,7 +96,6 @@ export default function Home() {
           <option value="likesCount">Likes Count</option>
         </select>
       </div>
-
 
       {!loading && !error && posts && workingPosts?.length ===  0 ?
         <p className={styles.alert}>No forums available</p> : null}

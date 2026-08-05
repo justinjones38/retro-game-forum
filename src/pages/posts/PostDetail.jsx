@@ -11,6 +11,7 @@ import ModalConfirm from "../../components/modals/ModalConfirm";
 import ModalForm from "../../components/modals/ModalForm";
 import ErrorText from "../../components/error/ErrorText";
 import FlagList from "../../components/flags/FlagList";
+import ReactPlayer from "react-player";
 
 export default function PostDetail() {
   const { id } = useParams();
@@ -26,7 +27,6 @@ export default function PostDetail() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const username = localStorage.getItem("username");
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,7 +82,7 @@ export default function PostDetail() {
         message: updatedForm.message,
       }));
       setIsFormEditing(false);
-      setErrorAction("")
+      setErrorAction("");
     } catch (error) {
       setErrorAction(error.message);
     }
@@ -96,7 +96,7 @@ export default function PostDetail() {
         throw new Error("Cannot delete data right now. Please try again later");
       }
       navigate("/");
-      setErrorAction("")
+      setErrorAction("");
     } catch (error) {
       setErrorAction(error);
     }
@@ -118,7 +118,7 @@ export default function PostDetail() {
         setPost(post);
         throw new Error("Cannot like post right now. Please try again later");
       }
-      setErrorAction("")
+      setErrorAction("");
     } catch (error) {
       setErrorAction(error.message);
       setPost(oldPost);
@@ -159,15 +159,23 @@ export default function PostDetail() {
                 ) : null}
               </div>
               <p className={styles.message}>{post.message}</p>
-              {post.imgUrl ? (
-                <div className={styles.imgContainer}>
+              <div className={styles.imgContainer}>
+                {post.imgUrl ? (
                   <img
                     src={post.imgUrl}
                     alt={`An attachment by ${post.username}`}
                     className={styles.img}
                   />
-                </div>
-              ) : null}
+                ) : null}
+                {post.vidUrl ? (
+                  <ReactPlayer
+                    src={post.vidUrl}
+                    title="uploaded video"
+                    className={styles.img}
+                    controls={true}
+                  ></ReactPlayer>
+                ) : null}
+              </div>
               <button className={styles.upvoteBtn} onClick={incrementLikes}>
                 <FaArrowUp /> {post.likes} Upvotes
               </button>

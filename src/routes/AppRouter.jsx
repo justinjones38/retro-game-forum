@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router";
+import ScrollToTop from "../components/ScrollToTop";
 import Layout from "../layouts/Layout";
 import Home from "../pages/Home";
 import Dashboard from "../pages/Dashboard";
@@ -14,6 +15,7 @@ import MyAccount from "../pages/account-setup/MyAccount";
 export default function AppRouter() {
   return (
     <BrowserRouter>
+    <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />

@@ -108,16 +108,27 @@ export default function CreatePost() {
           required
         ></textarea>
         <label htmlFor="imgUrl">
-          {" "}
           Image URL <span>(Optional)</span>
         </label>
         <input
           type="text"
-          className={styles.imgInput}
+          className={styles.urlInput}
           value={post.imgUrl}
           onChange={handleChange}
           name="imgUrl"
           id="imgUrl"
+        />
+
+        <label htmlFor="vidUrl">
+          Video URL <span>(Optional)</span>
+        </label>
+        <input
+          type="text"
+          className={styles.urlInput}
+          value={post.vidUrl}
+          onChange={handleChange}
+          name="vidUrl"
+          id="vidUrl"
         />
         <FlagForm checklist={checklist} handleChecklist={handleChecklist} />
         <Button disabled={loading}>

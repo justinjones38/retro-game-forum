@@ -26,6 +26,10 @@
   background-color: var(--primary-btn-bg-color);
 }
 
+.postTitle {
+  margin-bottom: 0.25em;
+}
+
 .titleLink {
   color: var(--primary-text-color);
   border-bottom: 2px solid var(--primary-text-color);
@@ -38,6 +42,17 @@
 
 .description {
   font-size: 0.85rem;
+}
+
+.author {
+  color: var(--author-text-color);
+  border-bottom: 1px solid var(--post-border-color);
+  transition: 0.3s color;
+}
+
+.author:focus, .author:hover {
+  color: var(--author-text-hover-color);
+
 }
 
 .description > span {

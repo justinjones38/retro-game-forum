@@ -33,14 +33,15 @@ export default function Login() {
         .select("*")
         .eq("username", formInputs.username)
         .single();
-      console.log(data);
+      if (error) {
+        throw new Error("Email and/or password is not correct");
+      }
       const isPasswordCorrect = await checkPassword(
         formInputs.password,
         data.password,
       );
-      console.log(isPasswordCorrect);
 
-      if (error || !isPasswordCorrect) {
+      if (!isPasswordCorrect) {
         throw new Error("Email and/or password is not correct");
       }
 

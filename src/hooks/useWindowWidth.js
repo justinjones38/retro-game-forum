@@ -8,10 +8,9 @@ export default function useWindowWidth() {
   };
   useEffect(() => {
     window.addEventListener("resize", getWindowSize);
-    console.log(windowWidth);
 
     return () => window.removeEventListener("resize", getWindowSize);
-  });
+  }, []);
 
   return { windowWidth };
 }

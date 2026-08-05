@@ -80,6 +80,7 @@
 .imgContainer {
   display: flex;
   justify-content: center;
+  margin-bottom: 1em;
 }
 
 .img {
@@ -90,7 +91,7 @@
 .upvoteBtn {
   background-color: var(--primary-btn-bg-color);
   color: var(--primary-btn-color);
-  padding: 0.25em 0.75em;
+  padding: 0.5em 0.75em;
   border-radius: 6px;
   border: none;
   font-weight: 700;

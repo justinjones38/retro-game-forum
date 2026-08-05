@@ -3,6 +3,7 @@ import styles from "./CreatePost.module.css";
 import { Navigate, useNavigate } from "react-router";
 import { supabase } from "../../services/createClient";
 import Button from "../../components/buttons/Button";
+import FlagLabel from "../../components/FlagLabel";
 
 export default function CreatePost() {
   const username = localStorage.getItem("username");
@@ -11,6 +12,7 @@ export default function CreatePost() {
     message: "",
     imgUrl: ""
   })
+  const [checklist, setChecklist] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
@@ -45,6 +47,7 @@ export default function CreatePost() {
           title: post.title,
           message: post.message,
           imgUrl: post.imgUrl,
+          flags: [...checklist],
           user_id: data.id
         })
 
@@ -66,6 +69,8 @@ export default function CreatePost() {
     return;
   }
 
+  const handleChecklist = (e) => setChecklist(prev => prev.includes(e.target.value) ? 
+    prev.filter(item => item !== e.target.value) : [...prev, e.target.value])
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>Create New Post</h2>
@@ -94,7 +99,7 @@ export default function CreatePost() {
           required
         >
         </textarea>
-        <label htmlFor="imgUrl"> Image URL <span>(Optional - Add the image url)</span></label>
+        <label htmlFor="imgUrl"> Image URL <span>(Optional)</span></label>
         <input 
           type="text"
           className={styles.imgInput}
@@ -103,6 +108,61 @@ export default function CreatePost() {
           name="imgUrl"
           id="imgUrl"
         />
+        <fieldset className={styles.flagFields}>
+          <legend className={styles.fieldTitle}>Select flags</legend>
+          <div className={styles.answerContainer}>
+            <FlagLabel
+              checked={checklist.includes("question")}
+              onChange={handleChecklist}
+              value="question"
+            >
+              Question
+            </FlagLabel>
+
+            <FlagLabel
+              checked={checklist.includes("opinion")}
+              onChange={handleChecklist}
+              value="opinion"
+            >
+              Opinion
+            </FlagLabel>
+
+            <FlagLabel
+              checked={checklist.includes("update")}
+              onChange={handleChecklist}
+              value="update"
+            >
+              Update
+            </FlagLabel>
+
+
+            <FlagLabel
+              checked={checklist.includes("announcement")}
+              onChange={handleChecklist}
+              value="announcement"
+            >
+              Announcement
+            </FlagLabel>
+
+            <FlagLabel
+              checked={checklist.includes("feedback")}
+              onChange={handleChecklist}
+              value="feedback"
+            >
+              Feedback
+            </FlagLabel>
+
+            <FlagLabel
+              checked={checklist.includes("story")}
+              onChange={handleChecklist}
+              value="story"
+            >
+              Story
+            </FlagLabel>
+          </div>
+
+        </fieldset>
+
         <Button disabled={loading}>{loading ? "Submitting Form" : "Submit"}</Button>
 
       </form>

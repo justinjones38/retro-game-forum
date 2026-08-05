@@ -1,0 +1,24 @@
+.label {
+  border: 1px solid var(--post-border-color);
+  padding: 0.5em 0.75em;
+  border-radius: 6px;
+  transition: 0.3s background-color;
+}
+
+.label:focus, .label:hover {
+  background-color: var(--confirm-btn-bg-hover-color);
+  cursor: pointer;
+}
+
+.label:has(.checkItem:checked) {
+  background-color: var(--confirm-btn-bg-color);
+  color: var(--confirm-btn-text-color);
+}
+
+
+
+.checkItem {
+  display: none;
+}
+
+

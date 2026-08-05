@@ -150,7 +150,7 @@ export default function PostDetail() {
               ) : null}
             </div>
             <p className={styles.message}>{post.message}</p>
-            {post.imgUrl ?<div className={styles.imgContainer}>
+            {post.imgUrl ? <div className={styles.imgContainer}>
               <img src={post.imgUrl} alt={`An attachment by ${post.username}`} className={styles.img} />
             </div> : null}
             <button className={styles.upvoteBtn} onClick={incrementLikes}>

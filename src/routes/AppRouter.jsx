@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import Layout from "../layouts/Layout";
 import Home from "../pages/Home";
+import Dashboard from "../pages/Dashboard";
 import Login from "../pages/account-setup/Login";
 import CreateAccount from "../pages/account-setup/CreateAccount";
 import AuthLogin from "../components/AuthLogin";
@@ -16,6 +17,7 @@ export default function AppRouter() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="login" element={<Login />} />
           <Route path="create-account" element={<CreateAccount />} />
           <Route element={<AuthLogin />}>

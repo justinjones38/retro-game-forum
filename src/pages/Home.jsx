@@ -1,4 +1,4 @@
-import { useOutletContext } from "react-router";
+import { useOutletContext, Navigate } from "react-router";
 import styles from "./Home.module.css";
 import { useEffect, useState } from "react";
 import { supabase } from "../services/createClient";
@@ -16,42 +16,6 @@ export default function Home() {
   const [errorLike, setErrorLike] = useState("");
   const [input, setInput] = useState("");
   const [sortBy, setSortBy] = useState("created_at");
-
-  const handleChange = (e) => {
-    setInput(e.target.value);
-    setWorkingPosts(
-      posts.filter((item) =>
-        item.title.toLowerCase().includes(e.target.value.toLowerCase()),
-      ),
-    );
-  };
-
-  const handleLikePost = async (id) => {
-    try {
-      const oldWorkingPosts = [...workingPosts];
-
-      setWorkingPosts((prev) =>
-        prev.map((prevItem) =>
-          prevItem.id === id
-            ? { ...prevItem, likes: prevItem.likes + 1 }
-            : prevItem,
-        ),
-      );
-
-      const likedPost = workingPosts.find((item) => item.id === id);
-      const { error } = await supabase
-        .from("posts")
-        .update({ likes: likedPost.likes + 1 })
-        .eq("id", id);
-
-      if (error) {
-        setWorkingPosts(oldWorkingPosts);
-        throw new Error(`Cannot like post now. Please try again later`);
-      }
-    } catch (error) {
-      setErrorLike(error.message);
-    }
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -87,6 +51,45 @@ export default function Home() {
       ),
     );
   }, [sortBy, input]);
+
+  if (!isLoggedIn) {
+    return <Navigate to="dashboard" />;
+  }
+  const handleChange = (e) => {
+    setInput(e.target.value);
+    setWorkingPosts(
+      posts.filter((item) =>
+        item.title.toLowerCase().includes(e.target.value.toLowerCase()),
+      ),
+    );
+  };
+
+  const handleLikePost = async (id) => {
+    try {
+      const oldWorkingPosts = [...workingPosts];
+
+      setWorkingPosts((prev) =>
+        prev.map((prevItem) =>
+          prevItem.id === id
+            ? { ...prevItem, likes: prevItem.likes + 1 }
+            : prevItem,
+        ),
+      );
+
+      const likedPost = workingPosts.find((item) => item.id === id);
+      const { error } = await supabase
+        .from("posts")
+        .update({ likes: likedPost.likes + 1 })
+        .eq("id", id);
+
+      if (error) {
+        setWorkingPosts(oldWorkingPosts);
+        throw new Error(`Cannot like post now. Please try again later`);
+      }
+    } catch (error) {
+      setErrorLike(error.message);
+    }
+  };
 
   return (
     <section className={styles.container}>

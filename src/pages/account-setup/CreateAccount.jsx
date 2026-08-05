@@ -43,13 +43,17 @@ export default function CreateAccount() {
         throw new Error("Passwords do not match");
       }
 
+      if(formInputs.password.length < 7) {
+        throw new Error("Passwords must be at least 7 characters")
+      }
+
       const { data : userData, error: userError } = await supabase
         .from("users")
         .select("email, username");
       
 
       if (userError) {
-        throw new Error("Cannot fetch data");
+        throw new Error("Cannot fetch user data");
       }
 
       const emails = userData.map((item) => item.email);
@@ -62,7 +66,7 @@ export default function CreateAccount() {
         throw new Error("Username already used");
       }
 
-      const {data: newUserData, error: newErrorData} = await supabase.from("users").insert({
+      const {error: newErrorData} = await supabase.from("users").insert({
         email: formInputs.email,
         password: hashPassword(formInputs.password),
         username: formInputs.username,
@@ -114,9 +118,9 @@ export default function CreateAccount() {
           type="password"
           val={formInputs.password}
           handleChange={handleChange}
-          placeholder="********"
+          placeholder="*******"
         >
-          Password
+          Password 
         </AccountFormInputs>
 
         <AccountFormInputs
@@ -124,7 +128,7 @@ export default function CreateAccount() {
           type="password"
           val={formInputs.confirmPassword}
           handleChange={handleChange}
-          placeholder="********"
+          placeholder="*******"
         >
           Confirm Password
         </AccountFormInputs>

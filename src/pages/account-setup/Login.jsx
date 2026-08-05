@@ -83,7 +83,7 @@ export default function Login() {
         </AccountFormInputs>
         <button className={styles.btn} disabled={loading}>
           {" "}
-          {loading ? "Logging in" : "Login"}
+          {loading ? "Logging in" : "Log In"}
         </button>
       </form>
 

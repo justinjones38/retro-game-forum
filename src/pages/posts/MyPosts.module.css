@@ -3,3 +3,8 @@
   flex-direction: column;
   gap: 1em;
 }
+
+.alert {
+  text-align: center;
+  font-size: 1.25rem;
+}

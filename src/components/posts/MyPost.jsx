@@ -1,10 +1,12 @@
 import styles from "./MyPost.module.css";
-import { FaArrowUp } from "react-icons/fa";
-import { getTimeDiff } from "../../utils/utils";
 import { Link } from "react-router";
 import { useState } from "react";
+import { getTimeDiff } from "../../utils/utils";
 import ModalConfirm from "../modals/ModalConfirm";
 import ModalForm from "../modals/ModalForm";
+import { FaArrowUp } from "react-icons/fa";
+import FlagList from "../flags/FlagList";
+
 
 export default function MyPost({
   post,
@@ -35,6 +37,8 @@ export default function MyPost({
 
   return (
     <li className={styles.postItem}>
+      {post.flags ? <FlagList flags={post.flags} /> : null}
+      <div className={styles.mainContentWrapper}>
       <div className={styles.leftItem}>
         <h3 className={styles.postTitle}>
           <Link to={`/posts/${post.id}`} className={styles.postLink}>
@@ -67,6 +71,7 @@ export default function MyPost({
             Delete
           </button>
         </div>
+      </div>
         {isModalShown ? (
           <ModalConfirm
             handleConfirm={() => deletePost(post.id)}

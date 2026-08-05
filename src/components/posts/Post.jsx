@@ -2,30 +2,13 @@ import styles from "./Post.module.css";
 import { FaArrowUp } from "react-icons/fa";
 import { getTimeDiff } from "../../utils/utils";
 import { Link } from "react-router";
+import ErrorText from "../error/ErrorText";
+import FlagList from "../flags/FlagList";
 
 export default function Post({ post, handleLikePost }) {
-  {
-    post.flags ? (
-      <ul className={styles.flagList}>
-        {post.flags.map((flag, index) => (
-          <li key={index} className={styles.flagItem}>
-            {flag}
-          </li>
-        ))}
-      </ul>
-    ) : null;
-  }
   return (
     <li className={styles.postItem}>
-      {post.flags ? (
-        <ul className={styles.flagList}>
-          {post.flags.map((flag, index) => (
-            <li key={index} className={styles.flagItem}>
-              {flag}
-            </li>
-          ))}
-        </ul>
-      ) : null}
+      {post.flags ? <FlagList flags={post.flags} /> : null}
       <div className={styles.contentWrapper}>
         <div className={styles.leftItem}>
           <h3 className={styles.postTitle}>
@@ -37,7 +20,10 @@ export default function Post({ post, handleLikePost }) {
             className={styles.description}
             aria-label={`uploaded by ${post.users.username}, posted ${getTimeDiff(post.created_at)} ago`}
           >
-            <Link to={`/users/${post.users.username}`}>
+            <Link
+              to={`/users/${post.users.username}`}
+              className={styles.author}
+            >
               {post.users.username}
             </Link>{" "}
             - <span>{getTimeDiff(post.created_at)}</span>

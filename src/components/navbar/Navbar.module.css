@@ -64,6 +64,7 @@ nav {
 
 .navMenu {
   position: fixed;
+  opacity: 0;
   top: -100%;
   left: 0;
   min-height: 100%;
@@ -74,6 +75,7 @@ nav {
 
 .navMenu.show {
   top: 0;
+  opacity: 100%;
   transition: 0.3s top;
 }
 

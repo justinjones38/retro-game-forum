@@ -1,28 +1,32 @@
-import { useNavigate, useParams } from "react-router";
 import styles from "./PostDetail.module.css";
+import { Navigate, useNavigate, useParams, Link } from "react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "../../services/createClient";
-import Loading from "../../components/Loading";
 import { getTimeDiff } from "../../utils/utils";
-import Replies from "../../components/Replies";
-import Button from "../../components/buttons/Button";
 import { FaArrowUp } from "react-icons/fa";
+import Loading from "../../components/Loading";
+import Replies from "../../components/posts/Replies";
+import Button from "../../components/buttons/Button";
 import ModalConfirm from "../../components/modals/ModalConfirm";
 import ModalForm from "../../components/modals/ModalForm";
+import ErrorText from "../../components/error/ErrorText";
+import FlagList from "../../components/flags/FlagList";
+import ReactPlayer from "react-player";
 
 export default function PostDetail() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [errorAction, setErrorAction] = useState("");
   const [isFormEditing, setIsFormEditing] = useState(false);
   const [updatedForm, setUpdatedForm] = useState({
     title: "",
     message: "",
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const username = localStorage.getItem("username");
   const navigate = useNavigate();
+  const username = localStorage.getItem("username");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +43,6 @@ export default function PostDetail() {
         }
         setPost(data);
       } catch (error) {
-        console.log(error.message);
         setError(error.message);
       } finally {
         setLoading(false);
@@ -79,8 +82,9 @@ export default function PostDetail() {
         message: updatedForm.message,
       }));
       setIsFormEditing(false);
+      setErrorAction("");
     } catch (error) {
-      console.log(error);
+      setErrorAction(error.message);
     }
   };
 
@@ -89,17 +93,18 @@ export default function PostDetail() {
       const { error } = await supabase.from("posts").delete("*").eq("id", id);
 
       if (error) {
-        throw new Error("Cannot fetch data");
+        throw new Error("Cannot delete data right now. Please try again later");
       }
       navigate("/");
+      setErrorAction("");
     } catch (error) {
-      console.log(error.message);
+      setErrorAction(error);
     }
   };
 
   const incrementLikes = async () => {
+    const oldPost = { ...post };
     try {
-      const oldPost = { ...post };
       setPost((prev) => ({
         ...prev,
         likes: prev.likes + 1,
@@ -111,60 +116,80 @@ export default function PostDetail() {
         .eq("id", id);
       if (error) {
         setPost(post);
-        throw new Error("Cannot fetch data");
+        throw new Error("Cannot like post right now. Please try again later");
       }
+      setErrorAction("");
     } catch (error) {
-      console.log(error.message);
+      setErrorAction(error.message);
+      setPost(oldPost);
     }
   };
 
   return (
     <section className={styles.container}>
       {loading ? <Loading /> : null}
-      {error ? <p>{error.message}</p> : null}
+      {error ? <ErrorText>{error}</ErrorText> : null}
+      {errorAction ? <ErrorText>{errorAction}</ErrorText> : null}
       {!loading && !error && post ? (
-        <div className={styles.contentWrapper}>
-          <div className={styles.postContent}>
-            <h2 className={styles.title}>{post.title}</h2>
-            <div className={styles.postDetails}>
-              <p className={styles.authorDetails}>
-                {post.users.username} -{" "}
-                <span>{getTimeDiff(post.created_at)}</span>
-              </p>
-              {username === post.users.username ? (
-                <div className={styles.btnContainer}>
-                  <button
-                    className={`${styles.btn} ${styles.editBtn}`}
-                    onClick={editTextInput}
+        <div className={styles.commentsSection}>
+          <div className={styles.mainContentWrapper}>
+            <div className={styles.postContent}>
+              {post.flags ? <FlagList flags={post.flags} /> : null}
+              <h2 className={styles.title}>{post.title}</h2>
+              <div className={styles.postDetails}>
+                <p className={styles.authorDetails}>
+                  <Link
+                    className={styles.link}
+                    to={`users/${post.users.username}`}
                   >
-                    Edit
-                  </button>
-                  <button
-                    className={`${styles.btn} ${styles.deleteBtn}`}
-                    onClick={() => setIsModalOpen(true)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              ) : null}
-            </div>
-            <p className={styles.message}>{post.message}</p>
-            {post.imgUrl ? (
-              <div className={styles.imgContainer}>
-                <img
-                  src={post.imgUrl}
-                  alt={`An attachment by ${post.username}`}
-                  className={styles.img}
-                />
+                    {post.users.username}
+                  </Link>{" "}
+                  - <span>{getTimeDiff(post.created_at)}</span>
+                </p>
+                {username === post.users.username ? (
+                  <div className={styles.btnContainer}>
+                    <button
+                      className={`${styles.btn} ${styles.editBtn}`}
+                      onClick={editTextInput}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className={`${styles.btn} ${styles.deleteBtn}`}
+                      onClick={() => setIsModalOpen(true)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ) : null}
               </div>
-            ) : null}
-            <button className={styles.upvoteBtn} onClick={incrementLikes}>
-              <FaArrowUp /> {post.likes} Upvotes
-            </button>
+              <p className={styles.message}>{post.message}</p>
+              <div className={styles.imgContainer}>
+                {post.imgUrl ? (
+                  <img
+                    src={post.imgUrl}
+                    alt={`An attachment by ${post.username}`}
+                    className={styles.img}
+                  />
+                ) : null}
+                {post.vidUrl ? (
+                  <ReactPlayer
+                    src={post.vidUrl}
+                    title="uploaded video"
+                    className={styles.img}
+                    controls={true}
+                  ></ReactPlayer>
+                ) : null}
+              </div>
+              <button className={styles.upvoteBtn} onClick={incrementLikes}>
+                <FaArrowUp /> {post.likes} Upvotes
+              </button>
+            </div>
           </div>
+          <Replies id={id} />
         </div>
       ) : null}
-      <Replies id={id} />
+
       {isModalOpen ? (
         <ModalConfirm
           handleConfirm={deletePost}

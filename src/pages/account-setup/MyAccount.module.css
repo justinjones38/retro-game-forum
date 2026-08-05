@@ -1,0 +1,65 @@
+.contentWrapper {
+  background-color: var(--card-bg-color);
+  width: 90%;
+  max-width: 700px;
+  margin: 0 auto 2em;
+  border-radius: 6px;
+  padding: 0.5em 1em;
+}
+
+.subtitle {
+  margin-bottom: 0.5em;
+}
+
+.miniContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+}
+
+.leftContent {
+  width: 50%;
+}
+
+.contentHeader {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.contentDescription {
+  font-size: 0.9rem;
+}
+
+.selectMenu {
+  font-size: 1rem;
+  padding: 0.25em 0.5em;
+  border-radius: 6px;
+}
+
+.dangerSection {
+  margin-bottom: 2em;
+  line-height: 1.4;
+}
+
+.dangerSection:last-of-type {
+  margin-bottom: 1em;
+}
+
+.btn {
+  font-size: 1rem;
+  background-color: var(--delete-btn-color);
+  color: var(--delete-btn-text-color);
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  transition: 0.3s background-color;
+  border: none;
+  align-items: center;
+  width: 50%;
+  max-width: 200px;
+}
+
+.btn:focus,
+.btn:hover {
+  background-color: var(--delete-btn-hover-color);
+}

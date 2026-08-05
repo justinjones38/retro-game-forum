@@ -1,14 +1,13 @@
-import { useOutletContext } from "react-router";
 import styles from "./Home.module.css";
+import { useOutletContext, Navigate } from "react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "../services/createClient";
 import Post from "../components/posts/Post";
 import Loading from "../components/Loading";
 import Modal from "../components/modals/ModalConfirm";
+import ErrorText from "../components/error/ErrorText";
 
 export default function Home() {
-  const username = localStorage.getItem("username");
-  const { isLoggedIn } = useOutletContext();
   const [posts, setPosts] = useState(null);
   const [workingPosts, setWorkingPosts] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -16,7 +15,48 @@ export default function Home() {
   const [errorLike, setErrorLike] = useState("");
   const [input, setInput] = useState("");
   const [sortBy, setSortBy] = useState("created_at");
+  const username = localStorage.getItem("username");
+  const { isLoggedIn } = useOutletContext();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const { data, error } = await supabase
+          .from("posts")
+          .select(`*, users(*)`)
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          throw new Error(
+            "Forum Data is not available right now. Please check back later",
+          );
+        }
+
+        setPosts(data);
+        setWorkingPosts(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    setWorkingPosts((prev) =>
+      prev?.toSorted((a, b) =>
+        sortBy === "created_at"
+          ? new Date(b[sortBy]) - new Date(a[sortBy])
+          : b[sortBy] - a[sortBy],
+      ),
+    );
+  }, [sortBy, input]);
+
+  if (!isLoggedIn) {
+    return <Navigate to="dashboard" />;
+  }
   const handleChange = (e) => {
     setInput(e.target.value);
     setWorkingPosts(
@@ -53,47 +93,11 @@ export default function Home() {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        console.log(sortBy);
-        setLoading(true);
-        const { data, error } = await supabase
-          .from("posts")
-          .select(`*, users(*)`)
-          .order("created_at", { ascending: false });
-
-        if (error) {
-          throw new Error("Cannot fetch post");
-        }
-
-        setPosts(data);
-        setWorkingPosts(data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    setWorkingPosts((prev) =>
-      prev?.toSorted((a, b) =>
-        sortBy === "created_at"
-          ? new Date(b[sortBy]) - new Date(a[sortBy])
-          : b[sortBy] - a[sortBy],
-      ),
-    );
-  }, [sortBy, input]);
-
   return (
     <section className={styles.container}>
       {isLoggedIn ? (
         <h2 className={styles.title}>Welcome {username}!</h2>
       ) : null}
-      {loading ? <Loading /> : null}
       <div className={styles.contentInputs}>
         <input
           type="text"
@@ -114,6 +118,9 @@ export default function Home() {
         </select>
       </div>
 
+      {loading ? <Loading /> : null}
+      {error ? <ErrorText>{error}</ErrorText> : null}
+      {errorLike ? <ErrorText>{errorLike}</ErrorText> : null}
       {!loading && !error && posts && workingPosts?.length === 0 ? (
         <p className={styles.alert}>No forums available</p>
       ) : null}

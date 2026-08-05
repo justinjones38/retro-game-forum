@@ -1,0 +1,10 @@
+.container {
+  text-align: center;
+}
+
+.alert {
+  font-size: 1.25rem;
+  text-align: center;
+  color: var(--alert-text-color);
+  margin-bottom: 1em;
+}

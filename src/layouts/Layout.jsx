@@ -18,6 +18,7 @@ export default function Layout() {
       root.removeAttribute("data-theme");
     }
   }, [theme]);
+
   return (
     <div className={styles.container}>
       <header>

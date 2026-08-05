@@ -11,19 +11,8 @@
   display: flex;
 }
 
-.flagList {
-  display: flex;
-  flex-wrap: wrap;
+.postTitle {
   margin-bottom: 0.25em;
-  gap: 1em;
-}
-
-.flagItem {
-  font-size: 0.8rem;
-  padding: 0.25em 0.5em;
-  border-radius: 6px;
-  color: var(--primary-btn-color);
-  background-color: var(--primary-btn-bg-color);
 }
 
 .titleLink {
@@ -38,6 +27,17 @@
 
 .description {
   font-size: 0.85rem;
+}
+
+.author {
+  color: var(--author-text-color);
+  border-bottom: 1px solid var(--post-border-color);
+  transition: 0.3s color;
+}
+
+.author:focus,
+.author:hover {
+  color: var(--author-text-hover-color);
 }
 
 .description > span {

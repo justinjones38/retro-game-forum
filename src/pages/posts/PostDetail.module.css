@@ -4,7 +4,7 @@
   margin: 1em auto;
 }
 
-.contentWrapper {
+.mainContentWrapper {
   margin-bottom: 1em;
 }
 
@@ -32,6 +32,17 @@
 .authorDetails {
   color: var(--author-text-color);
   font-size: 0.9rem;
+}
+
+.authorDetails .link {
+  color: var(--primary-text-color);
+  border-bottom: 1px solid var(--post-border-color);
+  transition: 0.3s color;
+}
+
+.authorDetails .link:focus,
+.author .link:hover {
+  color: var(--primary-text-hover-color);
 }
 
 .authorDetails > span {

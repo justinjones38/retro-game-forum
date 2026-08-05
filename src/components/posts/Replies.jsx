@@ -1,7 +1,8 @@
 import styles from "./Replies.module.css";
-import { supabase } from "../services/createClient";
+import { supabase } from "../../services/createClient";
 import { useEffect, useState } from "react";
-import { getTimeDiff } from "../utils/utils";
+import { getTimeDiff } from "../../utils/utils";
+import { Link } from "react-router";
 
 export default function Replies({ id }) {
   const [repliesList, setRepliesList] = useState(null);
@@ -22,9 +23,12 @@ export default function Replies({ id }) {
         )
         .eq("post_id", id)
         .order("created_at", { ascending: false });
+      if (error) {
+        throw new Error("Cannot fetch replies. Please try again later");
+      }
       setRepliesList(data);
     } catch (error) {
-      console.log(error.message);
+      setError(error.message);
     }
   };
 
@@ -92,8 +96,13 @@ export default function Replies({ id }) {
           ? repliesList.map((reply) => (
               <li key={reply.id} className={styles.listItem}>
                 <p className={styles.author}>
-                  {reply.users.username} -{" "}
-                  <span>{getTimeDiff(reply.created_at)}</span>
+                  <Link
+                    className={styles.link}
+                    to={`/users/${reply.users.username}`}
+                  >
+                    {reply.users.username}
+                  </Link>{" "}
+                  - <span>{getTimeDiff(reply.created_at)}</span>
                 </p>
                 <p className={styles.message}>{reply.message}</p>
               </li>

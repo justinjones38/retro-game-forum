@@ -1,7 +1,6 @@
 import styles from "./ModalForm.module.css";
 
 export default function ModalForm({ children, handleConfirm, handleReject }) {
-  console.log("ran");
   return (
     <dialog className={styles.container}>
       <form className={styles.contentWrapper} onSubmit={handleConfirm}>

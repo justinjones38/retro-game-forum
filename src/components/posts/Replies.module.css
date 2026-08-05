@@ -37,6 +37,17 @@
   margin-bottom: 1em;
 }
 
+.author .link {
+  color: var(--primary-text-color);
+  border-bottom: 1px solid var(--post-border-color);
+  transition: 0.3s color;
+}
+
+.author .link:focus,
+.author .link:hover {
+  color: var(--primary-text-hover-color);
+}
+
 .author > span {
   font-size: var(--faded-text-color);
 }

@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router";
+import ScrollToTop from "../components/ScrollToTop";
 import Layout from "../layouts/Layout";
 import Home from "../pages/Home";
+import Dashboard from "../pages/Dashboard";
 import Login from "../pages/account-setup/Login";
 import CreateAccount from "../pages/account-setup/CreateAccount";
 import AuthLogin from "../components/AuthLogin";
@@ -9,13 +11,16 @@ import MyPosts from "../pages/posts/MyPosts";
 import PostDetail from "../pages/posts/PostDetail";
 import UserInfo from "../pages/UserInfo";
 import MyAccount from "../pages/account-setup/MyAccount";
+import NotFound from "../pages/NotFound";
 
 export default function AppRouter() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="login" element={<Login />} />
           <Route path="create-account" element={<CreateAccount />} />
           <Route element={<AuthLogin />}>
@@ -25,6 +30,7 @@ export default function AppRouter() {
             <Route path="users/:username" element={<UserInfo />} />
             <Route path="my-account" element={<MyAccount />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

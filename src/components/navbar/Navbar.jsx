@@ -12,7 +12,6 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
   const { windowWidth } = useWindowWidth();
   const [username, setUsername] = useState(localStorage.getItem("username"));
   const [isModalShown, setIsModalShown] = useState(false);
-  console.log(isModalShown);
 
   const handleLogOut = () => {
     setIsModalShown(false);

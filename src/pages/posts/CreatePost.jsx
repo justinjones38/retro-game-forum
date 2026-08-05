@@ -1,9 +1,11 @@
-import { useState } from "react";
 import styles from "./CreatePost.module.css";
+import { useState } from "react";
 import { Navigate, useNavigate } from "react-router";
 import { supabase } from "../../services/createClient";
 import Button from "../../components/buttons/Button";
-import FlagLabel from "../../components/FlagLabel";
+import FlagLabel from "../../components/flags/FlagLabel";
+import FlagForm from "../../components/flags/FlagForm";
+import ErrorText from "../../components/error/ErrorText";
 
 export default function CreatePost() {
   const username = localStorage.getItem("username");
@@ -11,10 +13,11 @@ export default function CreatePost() {
     title: "",
     message: "",
     imgUrl: "",
+    vidUrl: "",
   });
   const [checklist, setChecklist] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
@@ -26,34 +29,44 @@ export default function CreatePost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("form ran");
-    if (!post.title || !post.message) {
-      return;
-    }
-
     try {
+      if (!post.title || !post.message) {
+        throw new Error(
+          "Form and/or message fields is empty. Please complete the fields",
+        );
+      }
+
+      if (post.title.length > 50) {
+        throw new Error("Post Title must be 50 characters or less. ");
+      }
+
       setLoading(true);
-      const { data, error } = await supabase
+      const { data: userData, error: userError } = await supabase
         .from("users")
         .select("*")
         .eq("username", username)
         .single();
-      if (error) {
-        throw new Error("Cannot fetch data");
+
+      if (userError) {
+        throw new Error("Cannot fetch user data. Please try again later");
       }
 
-      await supabase.from("posts").insert({
+      const { error: postError } = await supabase.from("posts").insert({
         title: post.title,
         message: post.message,
         imgUrl: post.imgUrl,
+        vidUrl: post.vidUrl,
         flags: [...checklist],
-        user_id: data.id,
+        user_id: userData.id,
       });
+
+      if (postError) {
+        throw new Error("Cannot create post. Please try again later");
+      }
 
       navigate("/");
     } catch (error) {
-      setError(true);
-      console.log(error);
+      setError(error.message);
     } finally {
       setLoading(false);
     }
@@ -76,6 +89,7 @@ export default function CreatePost() {
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>Create New Post</h2>
+      {error ? <ErrorText>{error}</ErrorText> : null}
       <form className={styles.form} onSubmit={handleSubmit}>
         <label htmlFor="title" className={styles.label}>
           Title *
@@ -105,70 +119,31 @@ export default function CreatePost() {
           required
         ></textarea>
         <label htmlFor="imgUrl">
-          {" "}
           Image URL <span>(Optional)</span>
         </label>
         <input
           type="text"
-          className={styles.imgInput}
+          className={styles.urlInput}
           value={post.imgUrl}
           onChange={handleChange}
           name="imgUrl"
           id="imgUrl"
+          placeholder="https://example.com"
         />
-        <fieldset className={styles.flagFields}>
-          <legend className={styles.fieldTitle}>Select flags</legend>
-          <div className={styles.answerContainer}>
-            <FlagLabel
-              checked={checklist.includes("question")}
-              onChange={handleChecklist}
-              value="question"
-            >
-              Question
-            </FlagLabel>
 
-            <FlagLabel
-              checked={checklist.includes("opinion")}
-              onChange={handleChecklist}
-              value="opinion"
-            >
-              Opinion
-            </FlagLabel>
-
-            <FlagLabel
-              checked={checklist.includes("update")}
-              onChange={handleChecklist}
-              value="update"
-            >
-              Update
-            </FlagLabel>
-
-            <FlagLabel
-              checked={checklist.includes("announcement")}
-              onChange={handleChecklist}
-              value="announcement"
-            >
-              Announcement
-            </FlagLabel>
-
-            <FlagLabel
-              checked={checklist.includes("feedback")}
-              onChange={handleChecklist}
-              value="feedback"
-            >
-              Feedback
-            </FlagLabel>
-
-            <FlagLabel
-              checked={checklist.includes("story")}
-              onChange={handleChecklist}
-              value="story"
-            >
-              Story
-            </FlagLabel>
-          </div>
-        </fieldset>
-
+        <label htmlFor="vidUrl">
+          Video URL <span>(Optional)</span>
+        </label>
+        <input
+          type="text"
+          className={styles.urlInput}
+          value={post.vidUrl}
+          onChange={handleChange}
+          name="vidUrl"
+          id="vidUrl"
+          placeholder="https://youtube.com"
+        />
+        <FlagForm checklist={checklist} handleChecklist={handleChecklist} />
         <Button disabled={loading}>
           {loading ? "Submitting Form" : "Submit"}
         </Button>

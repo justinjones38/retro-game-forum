@@ -1,0 +1,11 @@
+.flagFields {
+  border: none;
+}
+
+.answerContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  justify-items: center;
+  gap: 1em;
+  margin-bottom: 1em;
+}

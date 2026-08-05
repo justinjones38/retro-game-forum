@@ -14,6 +14,11 @@
   padding: 0.75em 0.25em;
 }
 
+.alert {
+  color: var(--alert-text-color);
+  text-align: center;
+}
+
 .postList {
   display: flex;
   flex-direction: column;

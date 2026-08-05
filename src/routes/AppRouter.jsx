@@ -7,6 +7,7 @@ import AuthLogin from "../components/AuthLogin";
 import CreatePost from "../pages/posts/CreatePost";
 import MyPosts from "../pages/posts/MyPosts";
 import PostDetail from "../pages/posts/PostDetail";
+import UserInfo from "../pages/UserInfo";
 
 export default function AppRouter() {
   return (
@@ -20,6 +21,7 @@ export default function AppRouter() {
             <Route path="create-post" element={<CreatePost />} />
             <Route path="my-posts" element={<MyPosts />} />
             <Route path="posts/:id" element={<PostDetail />} />
+            <Route path="users/:username" element={<UserInfo />} />
           </Route>
         </Route>
       </Routes>

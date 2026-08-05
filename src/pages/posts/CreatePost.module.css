@@ -17,5 +17,17 @@
   padding: 0.375em 0.25em;
   border-radius: 6px;
   font-size: 1.1rem;
+  margin-bottom: 1em;
 }
 
+.flagFields {
+  border: none;
+}
+
+.answerContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  justify-items: center;
+  gap: 1em;
+  margin-bottom: 1em;
+}

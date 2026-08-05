@@ -26,3 +26,15 @@ export function getTimeDiff(timestamp) {
   const minDiff = Math.floor(timeDiff / oneMinute);
   return minDiff === 1 ? `${minDiff} minute ago` : `${minDiff} minutes ago`;
 }
+
+
+export function getMonthandDate(date) {
+  const months = ["January", "February", "March", "April", "May",
+    "June", "July", "August", "September", "October", "November", "December"
+  ]
+
+  const joinedDate = new Date(date);
+  const month = months[joinedDate.getMonth()];
+  const year = joinedDate.getFullYear();
+  return `${month} ${year}`
+}

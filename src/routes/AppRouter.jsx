@@ -8,6 +8,7 @@ import CreatePost from "../pages/posts/CreatePost";
 import MyPosts from "../pages/posts/MyPosts";
 import PostDetail from "../pages/posts/PostDetail";
 import UserInfo from "../pages/UserInfo";
+import MyAccount from "../pages/account-setup/MyAccount";
 
 export default function AppRouter() {
   return (
@@ -22,6 +23,7 @@ export default function AppRouter() {
             <Route path="my-posts" element={<MyPosts />} />
             <Route path="posts/:id" element={<PostDetail />} />
             <Route path="users/:username" element={<UserInfo />} />
+            <Route path="my-account" element={<MyAccount />} />
           </Route>
         </Route>
       </Routes>

@@ -7,7 +7,7 @@
 body {
   font-size: 1rem;
   line-height: 1.6;
-  color: var(--text-color);
+  color: var(--primary-text-color);
   background-color: var(--bg-color);
   font-family: "Inter", sans-serif;
 }

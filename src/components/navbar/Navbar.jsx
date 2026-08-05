@@ -90,7 +90,7 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
                     </li>
                     <li className={styles.navItem}>
                       <NavLink
-                        to="#"
+                        to="my-account"
                         className={({ isActive }) =>
                           isActive
                             ? `${styles.navLink} ${styles.active}`

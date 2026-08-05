@@ -1,9 +1,10 @@
-import { useState } from "react";
 import styles from "./CreatePost.module.css";
+import { useState } from "react";
 import { Navigate, useNavigate } from "react-router";
 import { supabase } from "../../services/createClient";
 import Button from "../../components/buttons/Button";
 import FlagLabel from "../../components/flags/FlagLabel";
+import FlagForm from "../../components/flags/FlagForm";
 
 export default function CreatePost() {
   const username = localStorage.getItem("username");
@@ -11,12 +12,14 @@ export default function CreatePost() {
     title: "",
     message: "",
     imgUrl: "",
+    vidUrl: "",
   });
   const [checklist, setChecklist] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
   const navigate = useNavigate();
+  console.log(checklist)
 
   const handleChange = (e) =>
     setPost((prev) => ({
@@ -116,59 +119,7 @@ export default function CreatePost() {
           name="imgUrl"
           id="imgUrl"
         />
-        <fieldset className={styles.flagFields}>
-          <legend className={styles.fieldTitle}>Select flags</legend>
-          <div className={styles.answerContainer}>
-            <FlagLabel
-              checked={checklist.includes("question")}
-              onChange={handleChecklist}
-              value="question"
-            >
-              Question
-            </FlagLabel>
-
-            <FlagLabel
-              checked={checklist.includes("opinion")}
-              onChange={handleChecklist}
-              value="opinion"
-            >
-              Opinion
-            </FlagLabel>
-
-            <FlagLabel
-              checked={checklist.includes("update")}
-              onChange={handleChecklist}
-              value="update"
-            >
-              Update
-            </FlagLabel>
-
-            <FlagLabel
-              checked={checklist.includes("announcement")}
-              onChange={handleChecklist}
-              value="announcement"
-            >
-              Announcement
-            </FlagLabel>
-
-            <FlagLabel
-              checked={checklist.includes("feedback")}
-              onChange={handleChecklist}
-              value="feedback"
-            >
-              Feedback
-            </FlagLabel>
-
-            <FlagLabel
-              checked={checklist.includes("story")}
-              onChange={handleChecklist}
-              value="story"
-            >
-              Story
-            </FlagLabel>
-          </div>
-        </fieldset>
-
+        <FlagForm checklist={checklist} handleChecklist={handleChecklist} />
         <Button disabled={loading}>
           {loading ? "Submitting Form" : "Submit"}
         </Button>

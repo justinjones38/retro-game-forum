@@ -1,7 +1,7 @@
 import styles from "./Replies.module.css";
-import { supabase } from "../services/createClient";
+import { supabase } from "../../services/createClient";
 import { useEffect, useState } from "react";
-import { getTimeDiff } from "../utils/utils";
+import { getTimeDiff } from "../../utils/utils";
 
 export default function Replies({ id }) {
   const [repliesList, setRepliesList] = useState(null);

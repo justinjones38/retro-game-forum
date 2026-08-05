@@ -5,7 +5,7 @@ import { supabase } from "../services/createClient";
 import Post from "../components/posts/Post";
 import Loading from "../components/Loading";
 import Modal from "../components/modals/ModalConfirm";
-import ErrorText from "../components/ErrorText";
+import ErrorText from "../components/error/ErrorText";
 
 export default function Home() {
   const [posts, setPosts] = useState(null);

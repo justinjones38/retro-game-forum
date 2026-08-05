@@ -3,7 +3,7 @@ import styles from "./CreatePost.module.css";
 import { Navigate, useNavigate } from "react-router";
 import { supabase } from "../../services/createClient";
 import Button from "../../components/buttons/Button";
-import FlagLabel from "../../components/FlagLabel";
+import FlagLabel from "../../components/flags/FlagLabel";
 
 export default function CreatePost() {
   const username = localStorage.getItem("username");

@@ -1,15 +1,18 @@
-import { useParams } from "react-router";
 import styles from "./UserInfo.module.css";
+import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "../services/createClient";
-import Loading from "../components/Loading";
 import { getMonthandDate } from "../utils/utils";
+import Loading from "../components/Loading";
 import UserPost from "../components/posts/UserPost";
+import ErrorText from "../components/error/ErrorText";
+
 export default function UserInfo() {
   const [accountInfo, setAccountInfo] = useState(null);
   const { username } = useParams();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [errorAction, setErrorAction] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,8 +45,8 @@ export default function UserInfo() {
   }, []);
 
   const incrementLikesCounter = async (id) => {
+    const oldAccountInfo = {...accountInfo};
     try {
-      const oldAccountInfo = { ...accountInfo };
       setAccountInfo((prev) => ({
         ...prev,
         posts: prev.posts.map((prevPost, index) =>
@@ -61,17 +64,19 @@ export default function UserInfo() {
         .eq("id", id);
 
       if (error) {
-        throw new Error("Cannot add likes");
+        throw new Error("Sorry, Cannot like post now. Please try again later");
       }
     } catch (error) {
-      console.log(error.message);
+        setErrorAction(error.message);
+        setAccountInfo(oldAccountInfo);
     }
   };
 
   return (
     <section className={styles.container}>
       {loading ? <Loading /> : null}
-      {error ? <p>{error}</p> : null}
+      {error ? <ErrorText>{error}</ErrorText> : null}
+      {errorAction ? <ErrorText>{errorAction}</ErrorText> : null}
       {!loading && !error && accountInfo ? (
         <div className={styles.userContent}>
           <div className={styles.cardContainer}>

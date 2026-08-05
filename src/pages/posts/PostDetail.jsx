@@ -1,5 +1,5 @@
 import styles from "./PostDetail.module.css";
-import { useNavigate, useParams } from "react-router";
+import { Navigate, useNavigate, useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "../../services/createClient";
 import { getTimeDiff } from "../../utils/utils";
@@ -26,6 +26,7 @@ export default function PostDetail() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const username = localStorage.getItem("username");
+
 
   useEffect(() => {
     const fetchData = async () => {

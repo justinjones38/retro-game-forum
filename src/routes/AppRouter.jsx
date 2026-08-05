@@ -11,11 +11,12 @@ import MyPosts from "../pages/posts/MyPosts";
 import PostDetail from "../pages/posts/PostDetail";
 import UserInfo from "../pages/UserInfo";
 import MyAccount from "../pages/account-setup/MyAccount";
+import NotFound from "../pages/NotFound";
 
 export default function AppRouter() {
   return (
     <BrowserRouter>
-    <ScrollToTop />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
@@ -29,6 +30,7 @@ export default function AppRouter() {
             <Route path="users/:username" element={<UserInfo />} />
             <Route path="my-account" element={<MyAccount />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

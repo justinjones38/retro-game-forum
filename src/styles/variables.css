@@ -41,8 +41,8 @@
 :root[data-theme="dark"] {
   /* Background Colors */
   --bg-color: #22223b;
-  --navbar-bg-color: #8d99ae;
-  --card-bg-color: #8d99ae;
+  --navbar-bg-color: #3E4756;
+  --card-bg-color: #495465;
 
   --primary-text-color: #fcfcfc;
   --primary-text-hover-color: #fcfcfcb6;

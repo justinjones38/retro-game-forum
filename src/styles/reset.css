@@ -53,3 +53,7 @@ select,
 option {
   cursor: pointer;
 }
+
+svg {
+  color: var(--primary-text-color);
+}

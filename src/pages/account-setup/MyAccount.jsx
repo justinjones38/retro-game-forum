@@ -41,11 +41,11 @@ export default function MyAccount() {
       <div className={styles.contentWrapper}>
         <h3 className={styles.subtitle}>Preferences</h3>
         <div className={styles.miniContainer}>
-          <div className={styles.contentDescription}>
+          <div className={styles.leftContent}>
             <h4 className={styles.contentHeader}>Theme</h4>
-            <p className={styles.contentDescription}>Change the theme</p>
+            <p className={styles.contentDescription}>Allows you to change the theme of your website</p>
           </div>
-          <select value={theme} onChange={handleTheme}>
+          <select value={theme} onChange={handleTheme} className={styles.selectMenu}>
             <option value="light">Light</option>
             <option value="dark">Dark</option>
           </select>
@@ -60,8 +60,16 @@ export default function MyAccount() {
             <p className={styles.contentDescription}>
               Permanently delete all posts from your account
             </p>
+            <button>Delete Account</button>
           </div>
-          <button>Delete All Posts</button>
+
+          <div className={styles.description}>
+            <h4 className={styles.contentHeader}>Delete account</h4>
+            <p className={styles.contentDescription}>
+              Permanently delete your account
+            </p>
+          </div>
+          <button>Delete Account</button>
         </div>
       </div>
     </section>

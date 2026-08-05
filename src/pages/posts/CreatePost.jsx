@@ -5,6 +5,7 @@ import { supabase } from "../../services/createClient";
 import Button from "../../components/buttons/Button";
 import FlagLabel from "../../components/flags/FlagLabel";
 import FlagForm from "../../components/flags/FlagForm";
+import ErrorText from "../../components/error/ErrorText";
 
 export default function CreatePost() {
   const username = localStorage.getItem("username");
@@ -16,10 +17,9 @@ export default function CreatePost() {
   });
   const [checklist, setChecklist] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
 
   const navigate = useNavigate();
-  console.log(checklist)
 
   const handleChange = (e) =>
     setPost((prev) => ({
@@ -29,34 +29,41 @@ export default function CreatePost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("form ran");
-    if (!post.title || !post.message) {
-      return;
-    }
-
     try {
+      if (!post.title || !post.message) {
+        throw new Error("Form and/or message fields is empty. Please complete the fields");
+      }
+
+      if(post.title.length > 50) {
+        throw new Error("Post Title must be 50 characters or less. ")
+      }
+      
       setLoading(true);
-      const { data, error } = await supabase
+      const { data: userData, error: userError } = await supabase
         .from("users")
         .select("*")
         .eq("username", username)
         .single();
-      if (error) {
-        throw new Error("Cannot fetch data");
+
+      if (userError) {
+        throw new Error("Cannot fetch user data. Please try again later");
       }
 
-      await supabase.from("posts").insert({
+      const {error: postError} = await supabase.from("posts").insert({
         title: post.title,
         message: post.message,
         imgUrl: post.imgUrl,
         flags: [...checklist],
-        user_id: data.id,
+        user_id: userData.id,
       });
+
+      if(postError) {
+        throw new Error("Cannot create post. Please try again later");
+      }
 
       navigate("/");
     } catch (error) {
-      setError(true);
-      console.log(error);
+      setError(error.message);
     } finally {
       setLoading(false);
     }
@@ -79,6 +86,7 @@ export default function CreatePost() {
   return (
     <section className={styles.container}>
       <h2 className={styles.title}>Create New Post</h2>
+      {error ? <ErrorText>{error}</ErrorText> : null}
       <form className={styles.form} onSubmit={handleSubmit}>
         <label htmlFor="title" className={styles.label}>
           Title *
@@ -117,6 +125,7 @@ export default function CreatePost() {
           onChange={handleChange}
           name="imgUrl"
           id="imgUrl"
+          placeholder="https://example.com"
         />
 
         <label htmlFor="vidUrl">
@@ -129,6 +138,7 @@ export default function CreatePost() {
           onChange={handleChange}
           name="vidUrl"
           id="vidUrl"
+          placeholder="https://youtube.com"
         />
         <FlagForm checklist={checklist} handleChecklist={handleChecklist} />
         <Button disabled={loading}>

@@ -57,13 +57,13 @@
   --author-text-color: #FAFAFA;
 
   /* Button Colors */
-  --primary-btn-bg-color: #4B532D;
-  --primary-btn-bg-hover-color: #929E57;
-  --primary-btn-bg-disabled-color: #4b532d80;
+  --primary-btn-bg-color: #002d67;
+  --primary-btn-bg-hover-color: #00377e;
+  --primary-btn-bg-disabled-color: #002d6778;
   --primary-btn-color: #FCFCFC;
 
-  --secondary-btn-color: #554806;
-  --secondary-btn-bg-hover-color: #A18708;
+  --secondary-btn-color: #001e45;
+  --secondary-btn-bg-hover-color: #002657;
   --secondary-btn-text-color: #FCFCFC;
 
   --delete-btn-color: #950F37;

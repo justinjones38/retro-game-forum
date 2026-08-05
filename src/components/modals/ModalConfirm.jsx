@@ -5,7 +5,6 @@ export default function ModalConfirm({
   handleConfirm,
   handleReject,
 }) {
-  console.log("ran");
   return (
     <dialog className={styles.container}>
       <div className={styles.contentWrapper}>

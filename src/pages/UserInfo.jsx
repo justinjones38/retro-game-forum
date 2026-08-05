@@ -45,7 +45,7 @@ export default function UserInfo() {
   }, []);
 
   const incrementLikesCounter = async (id) => {
-    const oldAccountInfo = {...accountInfo};
+    const oldAccountInfo = { ...accountInfo };
     try {
       setAccountInfo((prev) => ({
         ...prev,
@@ -67,8 +67,8 @@ export default function UserInfo() {
         throw new Error("Sorry, Cannot like post now. Please try again later");
       }
     } catch (error) {
-        setErrorAction(error.message);
-        setAccountInfo(oldAccountInfo);
+      setErrorAction(error.message);
+      setAccountInfo(oldAccountInfo);
     }
   };
 

@@ -18,25 +18,24 @@ export default function Home() {
   const username = localStorage.getItem("username");
   const { isLoggedIn } = useOutletContext();
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const {data, error} = await supabase
+        const { data, error } = await supabase
           .from("posts")
           .select(`*, users(*)`)
           .order("created_at", { ascending: false });
 
-        console.log(error);
         if (error) {
-          throw new Error("Forum Data is not available right now. Please check back later");
+          throw new Error(
+            "Forum Data is not available right now. Please check back later",
+          );
         }
 
         setPosts(data);
         setWorkingPosts(data);
       } catch (error) {
-        console.log(error.message)
         setError(error.message);
       } finally {
         setLoading(false);
@@ -44,7 +43,6 @@ export default function Home() {
     };
     fetchData();
   }, []);
-  console.log(error);
 
   useEffect(() => {
     setWorkingPosts((prev) =>

@@ -1,6 +1,6 @@
-import styles from "./FlagList.module.css"
+import styles from "./FlagList.module.css";
 
-export default function FlagList({flags}) {
+export default function FlagList({ flags }) {
   return (
     <ul className={styles.flagList}>
       {flags.map((flag, index) => (

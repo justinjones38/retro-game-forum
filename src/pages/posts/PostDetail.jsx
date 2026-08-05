@@ -1,5 +1,5 @@
 import styles from "./PostDetail.module.css";
-import { Navigate, useNavigate, useParams } from "react-router";
+import { Navigate, useNavigate, useParams, Link } from "react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "../../services/createClient";
 import { getTimeDiff } from "../../utils/utils";
@@ -138,8 +138,13 @@ export default function PostDetail() {
               <h2 className={styles.title}>{post.title}</h2>
               <div className={styles.postDetails}>
                 <p className={styles.authorDetails}>
-                  {post.users.username} -{" "}
-                  <span>{getTimeDiff(post.created_at)}</span>
+                  <Link
+                    className={styles.link}
+                    to={`users/${post.users.username}`}
+                  >
+                    {post.users.username}
+                  </Link>{" "}
+                  - <span>{getTimeDiff(post.created_at)}</span>
                 </p>
                 {username === post.users.username ? (
                   <div className={styles.btnContainer}>

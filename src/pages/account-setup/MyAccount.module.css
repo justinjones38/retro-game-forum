@@ -18,6 +18,10 @@
   gap: 1em;
 }
 
+.leftContent {
+  width: 50%;
+}
+
 .contentHeader {
   font-size: 1rem;
   line-height: 1;
@@ -33,3 +37,29 @@
   border-radius: 6px;
 }
 
+.dangerSection {
+  margin-bottom: 2em;
+  line-height: 1.4;
+}
+
+.dangerSection:last-of-type {
+  margin-bottom: 1em;
+}
+
+.btn {
+  font-size: 1rem;
+  background-color: var(--delete-btn-color);
+  color: var(--delete-btn-text-color);
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  transition: 0.3s background-color;
+  border: none;
+  align-items: center;
+  width: 50%;
+  max-width: 200px;
+}
+
+.btn:focus,
+.btn:hover {
+  background-color: var(--delete-btn-hover-color);
+}

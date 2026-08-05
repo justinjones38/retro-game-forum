@@ -2,7 +2,7 @@
   /* Background Colors */
   --bg-color: #fefae0;
   --navbar-bg-color: #d4a373;
-  --card-bg-color: #F9E3AE;
+  --card-bg-color: #f9e3ae;
   --dashboard-bg-color: rgb(96, 95, 95);
 
   /* Text Colors */
@@ -52,9 +52,9 @@
   --primary-text-visited-color: #fcd1ff;
   --faded-text-color: #fcfcfcba;
   --menu-btn-hover-color: #fff;
-  --link-text-color: #BEBDEA;
-  --link-text-hover-color: #C1C1EB;
-  --alert-text-color: #E3A0A8;
+  --link-text-color: #bebdea;
+  --link-text-hover-color: #c1c1eb;
+  --alert-text-color: #e3a0a8;
   --author-text-color: #fafafa;
 
   /* Button Colors */

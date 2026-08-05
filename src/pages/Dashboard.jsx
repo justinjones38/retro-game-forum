@@ -20,7 +20,9 @@ export default function Dashboard() {
           Trade tips, swap old stories, and geek out over SNES, N64, Game Boy
           and everything in between. Join our great community!
         </p>
-          <Link to="/login" className={styles.btn}>Join Us</Link>
+        <Link to="/login" className={styles.btn}>
+          Join Us
+        </Link>
       </div>
     </section>
   );

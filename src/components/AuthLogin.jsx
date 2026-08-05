@@ -2,7 +2,6 @@ import { useOutletContext, Navigate, Outlet } from "react-router";
 
 export default function AuthLogin() {
   const { isLoggedIn, theme, setTheme } = useOutletContext();
-  console.log(isLoggedIn);
 
   if (!isLoggedIn) {
     return (

@@ -1,5 +1,3 @@
-
-
 .container {
   background-image: url("/src/assets/retro-img.jpg");
   background-color: var(--dashboard-bg-color);
@@ -46,7 +44,8 @@
   border-radius: 6px;
 }
 
-.btn:focus, .btn:hover {
+.btn:focus,
+.btn:hover {
   background-color: var(--primary-btn-bg-hover-color);
 }
 

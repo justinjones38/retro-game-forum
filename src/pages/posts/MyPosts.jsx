@@ -46,7 +46,6 @@ export default function MyPosts() {
   const incrementLikesCounter = async (id) => {
     const oldPost = [...posts];
     try {
-
       setPosts((prev) =>
         prev.map((prevPost) =>
           prevPost.id === id
@@ -67,7 +66,7 @@ export default function MyPosts() {
         throw new Error("Cannot like post. Please try again later");
       }
     } catch (error) {
-      setErrorAction(error.message)
+      setErrorAction(error.message);
     }
   };
 
@@ -81,7 +80,7 @@ export default function MyPosts() {
 
       fetchData();
     } catch (error) {
-      setErrorAction(error.message)
+      setErrorAction(error.message);
     }
   };
 
@@ -97,7 +96,7 @@ export default function MyPosts() {
       }
       fetchData();
     } catch (error) {
-      setErrorAction(error.message)
+      setErrorAction(error.message);
     }
   };
   return (
@@ -108,15 +107,19 @@ export default function MyPosts() {
       {errorAction ? <p>{errorAction}</p> : null}
       {!loading && !error && posts ? (
         <ul className={styles.postList}>
-          {posts.length > 0 ? posts.map((post) => (
-            <MyPost
-              key={post.id}
-              post={post}
-              incrementLikesCounter={incrementLikesCounter}
-              deletePost={deletePost}
-              editPost={editPost}
-            />
-          )) : <p className={styles.alert}>No posts has been made yet.</p>}
+          {posts.length > 0 ? (
+            posts.map((post) => (
+              <MyPost
+                key={post.id}
+                post={post}
+                incrementLikesCounter={incrementLikesCounter}
+                deletePost={deletePost}
+                editPost={editPost}
+              />
+            ))
+          ) : (
+            <p className={styles.alert}>No posts has been made yet.</p>
+          )}
         </ul>
       ) : null}
     </section>

@@ -35,9 +35,9 @@
   transition: 0.3s color;
 }
 
-.author:focus, .author:hover {
+.author:focus,
+.author:hover {
   color: var(--author-text-hover-color);
-
 }
 
 .description > span {

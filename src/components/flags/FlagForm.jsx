@@ -2,7 +2,6 @@ import styles from "./FlagForm.module.css";
 import FlagLabel from "./FlagLabel";
 
 export default function FlagForm({ checklist, handleChecklist }) {
-  console.log(checklist);
   return (
     <fieldset className={styles.flagFields}>
       <legend className={styles.fieldTitle}>Select flags</legend>

@@ -31,13 +31,15 @@ export default function CreatePost() {
     e.preventDefault();
     try {
       if (!post.title || !post.message) {
-        throw new Error("Form and/or message fields is empty. Please complete the fields");
+        throw new Error(
+          "Form and/or message fields is empty. Please complete the fields",
+        );
       }
 
-      if(post.title.length > 50) {
-        throw new Error("Post Title must be 50 characters or less. ")
+      if (post.title.length > 50) {
+        throw new Error("Post Title must be 50 characters or less. ");
       }
-      
+
       setLoading(true);
       const { data: userData, error: userError } = await supabase
         .from("users")
@@ -49,15 +51,16 @@ export default function CreatePost() {
         throw new Error("Cannot fetch user data. Please try again later");
       }
 
-      const {error: postError} = await supabase.from("posts").insert({
+      const { error: postError } = await supabase.from("posts").insert({
         title: post.title,
         message: post.message,
         imgUrl: post.imgUrl,
+        vidUrl: post.vidUrl,
         flags: [...checklist],
         user_id: userData.id,
       });
 
-      if(postError) {
+      if (postError) {
         throw new Error("Cannot create post. Please try again later");
       }
 

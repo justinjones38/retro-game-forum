@@ -18,7 +18,6 @@ export default function CreateAccount() {
   const navigate = useNavigate();
   const { setIsLoggedIn } = useOutletContext();
 
-
   const handleChange = (e) => {
     setFormInputs((prev) => ({
       ...prev,
@@ -43,14 +42,13 @@ export default function CreateAccount() {
         throw new Error("Passwords do not match");
       }
 
-      if(formInputs.password.length < 7) {
-        throw new Error("Passwords must be at least 7 characters")
+      if (formInputs.password.length < 7) {
+        throw new Error("Passwords must be at least 7 characters");
       }
 
-      const { data : userData, error: userError } = await supabase
+      const { data: userData, error: userError } = await supabase
         .from("users")
         .select("email, username");
-      
 
       if (userError) {
         throw new Error("Cannot fetch user data");
@@ -66,14 +64,14 @@ export default function CreateAccount() {
         throw new Error("Username already used");
       }
 
-      const {error: newErrorData} = await supabase.from("users").insert({
+      const { error: newErrorData } = await supabase.from("users").insert({
         email: formInputs.email,
         password: hashPassword(formInputs.password),
         username: formInputs.username,
       });
 
-      if(newErrorData) {
-        throw new Error("Cannot insert data in our database. Please try again")
+      if (newErrorData) {
+        throw new Error("Cannot insert data in our database. Please try again");
       }
 
       localStorage.setItem("username", formInputs.username);
@@ -120,7 +118,7 @@ export default function CreateAccount() {
           handleChange={handleChange}
           placeholder="*******"
         >
-          Password 
+          Password
         </AccountFormInputs>
 
         <AccountFormInputs

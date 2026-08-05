@@ -6,22 +6,19 @@ import { hashPassword } from "../../utils/utils";
 import AccountFormInputs from "../../components/AccountFormInputs";
 import Button from "../../components/buttons/Button";
 
-export default function Create() {
+export default function CreateAccount() {
   const [formInputs, setFormInputs] = useState({
     email: "",
     username: "",
     password: "",
     confirmPassword: "",
   });
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [isPasswordsMatched, setIsPasswordsMatched] = useState(false);
-  const [isEmailsMatched, setIsEmailsMatched] = useState(false);
-  const [isUsernamesMatched, setIsUsernamesMatched] = useState(false);
-
   const navigate = useNavigate();
   const { setIsLoggedIn } = useOutletContext();
+
+
   const handleChange = (e) => {
     setFormInputs((prev) => ({
       ...prev,
@@ -46,16 +43,17 @@ export default function Create() {
         throw new Error("Passwords do not match");
       }
 
-      const { data, error } = await supabase
+      const { data : userData, error: userError } = await supabase
         .from("users")
         .select("email, username");
+      
 
-      if (error) {
+      if (userError) {
         throw new Error("Cannot fetch data");
       }
 
-      const emails = data.map((item) => item.email);
-      const users = data.map((item) => item.username);
+      const emails = userData.map((item) => item.email);
+      const users = userData.map((item) => item.username);
 
       if (emails.includes(formInputs.email)) {
         throw new Error("Email already used");
@@ -64,11 +62,15 @@ export default function Create() {
         throw new Error("Username already used");
       }
 
-      await supabase.from("users").insert({
+      const {data: newUserData, error: newErrorData} = await supabase.from("users").insert({
         email: formInputs.email,
         password: hashPassword(formInputs.password),
         username: formInputs.username,
       });
+
+      if(newErrorData) {
+        throw new Error("Cannot insert data in our database. Please try again")
+      }
 
       localStorage.setItem("username", formInputs.username);
       setIsLoggedIn(true);
@@ -120,7 +122,7 @@ export default function Create() {
         <AccountFormInputs
           name="confirmPassword"
           type="password"
-          val={formInputs.confirmPasswordpassword}
+          val={formInputs.confirmPassword}
           handleChange={handleChange}
           placeholder="********"
         >

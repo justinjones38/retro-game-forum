@@ -12,6 +12,7 @@
   border-radius: 6.5px;
 }
 
-.btn:focus, .btn:hover {
+.btn:focus,
+.btn:hover {
   background-color: var(--primary-btn-bg-hover-color);
 }

@@ -1,8 +1,12 @@
 import bcrypt from "bcryptjs-react";
 
-export function hashPassword(word) {
-  let hash = bcrypt.hashSync("bacon", 8);
+export function hashPassword(password) {
+  const hash = bcrypt.hashSync(password, 8);
   return hash;
+}
+
+export function checkPassword(password, hash) {
+  return bcrypt.compareSync(password, hash);
 }
 
 export function getTimeDiff(timestamp) {
@@ -27,14 +31,24 @@ export function getTimeDiff(timestamp) {
   return minDiff === 1 ? `${minDiff} minute ago` : `${minDiff} minutes ago`;
 }
 
-
 export function getMonthandDate(date) {
-  const months = ["January", "February", "March", "April", "May",
-    "June", "July", "August", "September", "October", "November", "December"
-  ]
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   const joinedDate = new Date(date);
   const month = months[joinedDate.getMonth()];
   const year = joinedDate.getFullYear();
-  return `${month} ${year}`
+  return `${month} ${year}`;
 }

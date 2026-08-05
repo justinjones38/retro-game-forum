@@ -52,7 +52,8 @@
   transition: 0.3s background-color;
 }
 
-.btnConfirm:focus, .btnConfirm:hover {
+.btnConfirm:focus,
+.btnConfirm:hover {
   background-color: var(--confirm-btn-bg-hover-color);
 }
 
@@ -62,7 +63,8 @@
   transition: 0.3s background-color;
 }
 
-.btnReject:focus, .btnReject:hover {
+.btnReject:focus,
+.btnReject:hover {
   background-color: var(--delete-btn-hover-color);
 }
 

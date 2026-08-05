@@ -5,78 +5,74 @@
   --card-bg-color: #faedcd;
 
   /* Text Colors */
-  --primary-text-color: #14141A;
+  --primary-text-color: #14141a;
   --primary-text-hover-color: #14141a95;
   --primary-text-visited-color: #510057;
-  --faded-text-color: #14141Aba;
+  --faded-text-color: #14141aba;
   --menu-btn-hover-color: #fff;
-  --link-text-color: #453FC6;
-  --link-text-hover-color: #20206F;
-  --alert-text-color: #83252B;
-  --author-text-color: #423C48;
+  --link-text-color: #453fc6;
+  --link-text-hover-color: #20206f;
+  --alert-text-color: #83252b;
+  --author-text-color: #423c48;
 
   /* Button Colors */
-  --primary-btn-bg-color: #4B532D;
-  --primary-btn-bg-hover-color: #929E57;
+  --primary-btn-bg-color: #4b532d;
+  --primary-btn-bg-hover-color: #929e57;
   --primary-btn-bg-disabled-color: #4b532d80;
-  --primary-btn-color: #FCFCFC;
+  --primary-btn-color: #fcfcfc;
 
   --secondary-btn-color: #554806;
-  --secondary-btn-bg-hover-color: #A18708;
-  --secondary-btn-text-color: #FCFCFC;
+  --secondary-btn-bg-hover-color: #a18708;
+  --secondary-btn-text-color: #fcfcfc;
 
-  --delete-btn-color: #950F37;
-  --delete-btn-hover-color: #C8144A;
-  --delete-btn-text-color: #FCFCFC;
+  --delete-btn-color: #950f37;
+  --delete-btn-hover-color: #c8144a;
+  --delete-btn-text-color: #fcfcfc;
 
-  --confirm-btn-bg-color: #1D492C;
-  --confirm-btn-bg-hover-color: #3C965B;
-  --confirm-btn-text-color: #FCFCFC;
-
+  --confirm-btn-bg-color: #1d492c;
+  --confirm-btn-bg-hover-color: #3c965b;
+  --confirm-btn-text-color: #fcfcfc;
 
   /* Border Colors */
-  --navbar-border-color: #14141A;
+  --navbar-border-color: #14141a;
   --post-border-color: #0000007c;
-
 }
 
 :root[data-theme="dark"] {
   /* Background Colors */
   --bg-color: #22223b;
   --navbar-bg-color: #8d99ae;
-  --card-bg-color: #8d99ae; 
+  --card-bg-color: #8d99ae;
 
-  --primary-text-color: #FCFCFC;
+  --primary-text-color: #fcfcfc;
   --primary-text-hover-color: #fcfcfcb6;
-  --primary-text-visited-color: #FCD1FF;
-  --faded-text-color: #FCFCFCBA;
+  --primary-text-visited-color: #fcd1ff;
+  --faded-text-color: #fcfcfcba;
   --menu-btn-hover-color: #fff;
-  --link-text-color: #453FC6;
-  --link-text-hover-color: #20206F;
-  --alert-text-color: #83252B;
-  --author-text-color: #FAFAFA;
+  --link-text-color: #453fc6;
+  --link-text-hover-color: #20206f;
+  --alert-text-color: #83252b;
+  --author-text-color: #fafafa;
 
   /* Button Colors */
   --primary-btn-bg-color: #002d67;
   --primary-btn-bg-hover-color: #00377e;
   --primary-btn-bg-disabled-color: #002d6778;
-  --primary-btn-color: #FCFCFC;
+  --primary-btn-color: #fcfcfc;
 
   --secondary-btn-color: #001e45;
   --secondary-btn-bg-hover-color: #002657;
-  --secondary-btn-text-color: #FCFCFC;
+  --secondary-btn-text-color: #fcfcfc;
 
-  --delete-btn-color: #950F37;
-  --delete-btn-hover-color: #C8144A;
-  --delete-btn-text-color: #FCFCFC;
+  --delete-btn-color: #950f37;
+  --delete-btn-hover-color: #c8144a;
+  --delete-btn-text-color: #fcfcfc;
 
-  --confirm-btn-bg-color: #1D492C;
-  --confirm-btn-bg-hover-color: #3C965B;
-  --confirm-btn-text-color: #FCFCFC;
-
+  --confirm-btn-bg-color: #1d492c;
+  --confirm-btn-bg-hover-color: #3c965b;
+  --confirm-btn-text-color: #fcfcfc;
 
   /* Border Colors */
-  --navbar-border-color: #F7F7F8;
-  --post-border-color: #FFFFFFbf;
-
+  --navbar-border-color: #f7f7f8;
+  --post-border-color: #ffffffbf;
 }

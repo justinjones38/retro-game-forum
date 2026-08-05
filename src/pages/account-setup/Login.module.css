@@ -25,7 +25,8 @@
   border-radius: 6.5px;
 }
 
-.btn:focus, .btn:hover {
+.btn:focus,
+.btn:hover {
   background-color: var(--primary-btn-bg-hover-color);
 }
 
@@ -39,7 +40,8 @@
   border-bottom: 1px solid var(--link-text-color);
 }
 
-.description > a:hover, .description > a:focus {
+.description > a:hover,
+.description > a:focus {
   color: var(--link-text-hover-color);
   border-bottom: 1px solid var(--link-text-hover-color);
 }

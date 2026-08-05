@@ -11,8 +11,8 @@ export default function Create() {
     email: "",
     username: "",
     password: "",
-    confirmPassword: ""
-  })
+    confirmPassword: "",
+  });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -21,24 +21,26 @@ export default function Create() {
   const [isUsernamesMatched, setIsUsernamesMatched] = useState(false);
 
   const navigate = useNavigate();
-  const {setIsLoggedIn} = useOutletContext();
-  const handleChange = e => {
-    setFormInputs(prev => ({
+  const { setIsLoggedIn } = useOutletContext();
+  const handleChange = (e) => {
+    setFormInputs((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
-    }))
-  }
-
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-
     try {
-      if (!formInputs.email || !formInputs.username || !formInputs.password || !formInputs.confirmPassword) {
+      if (
+        !formInputs.email ||
+        !formInputs.username ||
+        !formInputs.password ||
+        !formInputs.confirmPassword
+      ) {
         throw new Error("Please complete all fields");
-
       }
       if (formInputs.password !== formInputs.confirmPassword) {
         throw new Error("Passwords do not match");
@@ -56,15 +58,15 @@ export default function Create() {
       const users = data.map((item) => item.username);
 
       if (emails.includes(formInputs.email)) {
-        throw new Error("Email already used")
+        throw new Error("Email already used");
       }
       if (users.includes(formInputs.username)) {
-        throw new Error("Username already used")
+        throw new Error("Username already used");
       }
 
       await supabase.from("users").insert({
         email: formInputs.email,
-        password: formInputs.password,
+        password: hashPassword(formInputs.password),
         username: formInputs.username,
       });
 
@@ -83,10 +85,7 @@ export default function Create() {
     <section className={styles.container}>
       <h2 className={styles.title}>Create Account</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
-
-        {error ? (
-          <p className={styles.alert}>{error}</p>
-        ) : null}
+        {error ? <p className={styles.alert}>{error}</p> : null}
 
         <AccountFormInputs
           name="email"
@@ -105,9 +104,8 @@ export default function Create() {
           handleChange={handleChange}
           placeholder="abc123"
         >
-        Username
+          Username
         </AccountFormInputs>
-
 
         <AccountFormInputs
           name="password"
@@ -116,7 +114,7 @@ export default function Create() {
           handleChange={handleChange}
           placeholder="********"
         >
-        Password
+          Password
         </AccountFormInputs>
 
         <AccountFormInputs
@@ -126,7 +124,7 @@ export default function Create() {
           handleChange={handleChange}
           placeholder="********"
         >
-        Confirm Password
+          Confirm Password
         </AccountFormInputs>
 
         <Button disabled={loading}>

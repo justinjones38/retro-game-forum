@@ -4,7 +4,6 @@ import { getTimeDiff } from "../../utils/utils";
 import { Link } from "react-router";
 
 export default function Post({ post, handleLikePost }) {
-  console.log(post);
   {
     post.flags ? (
       <ul className={styles.flagList}>
@@ -45,7 +44,10 @@ export default function Post({ post, handleLikePost }) {
           </p>
         </div>
         <div className={styles.rightItem}>
-          <button className={styles.btn} onClick={() => handleLikePost(post.id)}>
+          <button
+            className={styles.btn}
+            onClick={() => handleLikePost(post.id)}
+          >
             <FaArrowUp className={styles.icon} />
           </button>
           <p

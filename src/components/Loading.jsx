@@ -1,4 +1,4 @@
-import styles from "./Loading.module.css"
+import styles from "./Loading.module.css";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 export default function Loading() {
@@ -6,5 +6,5 @@ export default function Loading() {
     <section>
       <AiOutlineLoading3Quarters className={styles.loadingScreen} />
     </section>
-  )
+  );
 }

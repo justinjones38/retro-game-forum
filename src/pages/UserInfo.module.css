@@ -16,8 +16,8 @@
 }
 
 .title {
-  font-weight: 400;
   margin-bottom: 0;
+  line-height: 1;
 }
 
 .secondaryCardContainer {

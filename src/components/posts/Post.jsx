@@ -2,19 +2,9 @@ import styles from "./Post.module.css";
 import { FaArrowUp } from "react-icons/fa";
 import { getTimeDiff } from "../../utils/utils";
 import { Link } from "react-router";
+import ErrorText from "../ErrorText";
 
 export default function Post({ post, handleLikePost }) {
-  {
-    post.flags ? (
-      <ul className={styles.flagList}>
-        {post.flags.map((flag, index) => (
-          <li key={index} className={styles.flagItem}>
-            {flag}
-          </li>
-        ))}
-      </ul>
-    ) : null;
-  }
   return (
     <li className={styles.postItem}>
       {post.flags ? (

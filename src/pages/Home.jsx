@@ -122,6 +122,7 @@ export default function Home() {
 
       {loading ? <Loading /> : null}
       {error ? <ErrorText>{error}</ErrorText> : null}
+      {errorLike ? <ErrorText>{errorLike}</ErrorText> : null}
       {!loading && !error && posts && workingPosts?.length === 0 ? (
         <p className={styles.alert}>No forums available</p>
       ) : null}

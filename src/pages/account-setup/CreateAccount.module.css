@@ -11,8 +11,6 @@
   margin-top: 1em;
 }
 
-
-
 .description {
   text-align: center;
 }
@@ -23,7 +21,8 @@
   border-bottom: 1px solid var(--link-text-color);
 }
 
-.description > a:hover, .description > a:focus {
+.description > a:hover,
+.description > a:focus {
   color: var(--link-text-hover-color);
   border-bottom: 1px solid var(--link-text-hover-color);
 }

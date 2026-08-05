@@ -31,13 +31,10 @@
   border-bottom: 2px solid var(--primary-text-color);
 }
 
-
-
-
-.titleLink:focus, .titleLink:hover {
+.titleLink:focus,
+.titleLink:hover {
   color: var(--primary-text-hover-color);
 }
-
 
 .description {
   font-size: 0.85rem;

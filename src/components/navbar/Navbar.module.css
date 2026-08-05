@@ -21,8 +21,9 @@ nav {
   transition: 0.3s color;
 }
 
-.leftNav:focus, .leftNav:hover {
-  color: var(--primary-text-hover-color)
+.leftNav:focus,
+.leftNav:hover {
+  color: var(--primary-text-hover-color);
 }
 
 .icon {
@@ -41,23 +42,25 @@ nav {
   border-radius: 6px;
 }
 
-.navBtn:hover, .navBtn:focus {
+.navBtn:hover,
+.navBtn:focus {
   background-color: var(--primary-btn-bg-hover-color);
 }
-
 
 .hamburgerMenu {
   display: block;
 }
 
-.hamburgerMenu, .closeBtn {
+.hamburgerMenu,
+.closeBtn {
   transition: 0.3s color;
 }
 
-.hamburgerMenu:focus, .hamburgerMenu:hover .closeBtn:focus, .closeBtn:hover {
-  color: var(--menu-btn-hover-color)
+.hamburgerMenu:focus,
+.hamburgerMenu:hover .closeBtn:focus,
+.closeBtn:hover {
+  color: var(--menu-btn-hover-color);
 }
-
 
 .navMenu {
   position: fixed;
@@ -78,7 +81,6 @@ nav {
   margin: 0 0 1.25em auto;
 }
 
-
 .navList {
   display: flex;
   flex-direction: column;
@@ -91,18 +93,19 @@ nav {
   color: var(--primary-text-color);
 }
 
-.navLink:focus, .navLink:hover {
+.navLink:focus,
+.navLink:hover {
   border-bottom: 4px solid var(--navbar-border-color);
 }
 
-
 @media (min-width: 750px) {
-  .closeBtn, .hamburgerMenu {
+  .closeBtn,
+  .hamburgerMenu {
     display: none;
   }
 
   .navMenu {
-    all: unset;    
+    all: unset;
   }
 
   .navList {
@@ -110,7 +113,8 @@ nav {
     gap: 2.5em;
   }
 
-  .navLink, .navBtn {
+  .navLink,
+  .navBtn {
     font-size: 1.1rem;
     align-items: center;
   }

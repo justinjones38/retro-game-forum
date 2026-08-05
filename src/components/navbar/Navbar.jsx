@@ -25,9 +25,7 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
   const cancelLogOut = () => {
     setIsModalShown(false);
     setIsMenuShown(false);
-  }
-
-
+  };
 
   return (
     <div className={styles.container}>
@@ -102,7 +100,10 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
                       </NavLink>
                     </li>
                     <li className={`${styles.navItem}`}>
-                      <button onClick={() => setIsModalShown(true)} className={styles.navBtn}>
+                      <button
+                        onClick={() => setIsModalShown(true)}
+                        className={styles.navBtn}
+                      >
                         Log Out
                       </button>
                     </li>
@@ -113,13 +114,11 @@ export default function Navbar({ isLoggedIn, setIsLoggedIn }) {
           </div>
         </div>
       </nav>
-      {isModalShown ? 
-      <Modal
-        handleConfirm={handleLogOut}
-        handleReject={cancelLogOut}
-      >Are you sure you want to log out?</Modal> :
-      
-      null}
+      {isModalShown ? (
+        <Modal handleConfirm={handleLogOut} handleReject={cancelLogOut}>
+          Are you sure you want to log out?
+        </Modal>
+      ) : null}
     </div>
   );
 }

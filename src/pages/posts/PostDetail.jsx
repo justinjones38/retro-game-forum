@@ -97,27 +97,26 @@ export default function PostDetail() {
     }
   };
 
-  const incrementLikes = async() => {
+  const incrementLikes = async () => {
     try {
-      const oldPost = {...post}
-      setPost(prev => ({
+      const oldPost = { ...post };
+      setPost((prev) => ({
         ...prev,
-        likes: prev.likes + 1
-      }))
+        likes: prev.likes + 1,
+      }));
 
-      const {error} = await supabase
+      const { error } = await supabase
         .from("posts")
-        .update({likes: oldPost.likes + 1})
-        .eq("id", id)
-      if(error) {
-        setPost(post)
-        throw new Error("Cannot fetch data")
+        .update({ likes: oldPost.likes + 1 })
+        .eq("id", id);
+      if (error) {
+        setPost(post);
+        throw new Error("Cannot fetch data");
       }
-    } catch(error) {
+    } catch (error) {
       console.log(error.message);
     }
-
-  }
+  };
 
   return (
     <section className={styles.container}>
@@ -150,9 +149,15 @@ export default function PostDetail() {
               ) : null}
             </div>
             <p className={styles.message}>{post.message}</p>
-            {post.imgUrl ? <div className={styles.imgContainer}>
-              <img src={post.imgUrl} alt={`An attachment by ${post.username}`} className={styles.img} />
-            </div> : null}
+            {post.imgUrl ? (
+              <div className={styles.imgContainer}>
+                <img
+                  src={post.imgUrl}
+                  alt={`An attachment by ${post.username}`}
+                  className={styles.img}
+                />
+              </div>
+            ) : null}
             <button className={styles.upvoteBtn} onClick={incrementLikes}>
               <FaArrowUp /> {post.likes} Upvotes
             </button>
@@ -176,7 +181,9 @@ export default function PostDetail() {
           isForm={true}
         >
           <>
-            <label htmlFor="title" className={styles.label}>Title</label>
+            <label htmlFor="title" className={styles.label}>
+              Title
+            </label>
             <input
               type="text"
               value={updatedForm.title}
@@ -185,7 +192,9 @@ export default function PostDetail() {
               onChange={handleUpdatedForm}
               className={styles.input}
             />
-            <label htmlFor="message" className={styles.label}>Message</label>
+            <label htmlFor="message" className={styles.label}>
+              Message
+            </label>
             <textarea
               value={updatedForm.message}
               name="message"

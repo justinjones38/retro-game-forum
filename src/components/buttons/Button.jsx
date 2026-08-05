@@ -1,7 +1,9 @@
-import styles from "./Button.module.css"
+import styles from "./Button.module.css";
 
-export default function Button({children, ...restProps}) {
+export default function Button({ children, ...restProps }) {
   return (
-    <button className={styles.btn} {...restProps}>{children}</button>
-  )
+    <button className={styles.btn} {...restProps}>
+      {children}
+    </button>
+  );
 }

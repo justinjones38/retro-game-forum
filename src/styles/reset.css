@@ -1,4 +1,6 @@
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -24,12 +26,16 @@ img {
   max-width: 100%;
 }
 
-img, input, textarea {
+img,
+input,
+textarea {
   display: block;
 }
 
-
-input, a, button, textarea {
+input,
+a,
+button,
+textarea {
   font-family: inherit;
 }
 
@@ -41,6 +47,9 @@ a {
   text-decoration: none;
 }
 
-button, svg, select, option {
+button,
+svg,
+select,
+option {
   cursor: pointer;
 }

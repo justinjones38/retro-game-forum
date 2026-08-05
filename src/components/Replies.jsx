@@ -21,7 +21,7 @@ export default function Replies({ id }) {
               posts(*)`,
         )
         .eq("post_id", id)
-        .order("created_at", {ascending: false})
+        .order("created_at", { ascending: false });
       setRepliesList(data);
     } catch (error) {
       console.log(error.message);
@@ -63,14 +63,14 @@ export default function Replies({ id }) {
     fetchData();
   };
   const getCommentsLength = () => {
-    if(!repliesList?.length) {
-      return `0 Comments`
+    if (!repliesList?.length) {
+      return `0 Comments`;
     } else if (repliesList.length === 1) {
-      return `1 Comment` 
+      return `1 Comment`;
     } else {
-      return `${repliesList.length} Comments`
+      return `${repliesList.length} Comments`;
     }
-  }
+  };
   return (
     <div className={styles.container}>
       <p className={styles.commentsLength}>{getCommentsLength()}</p>
@@ -83,22 +83,22 @@ export default function Replies({ id }) {
           onChange={(e) => setReply(e.target.value)}
           placeholder="Add a Comment"
         />
-        <button className={styles.btn} disabled={!reply}>Reply</button>
+        <button className={styles.btn} disabled={!reply}>
+          Reply
+        </button>
       </form>
       <ul className={styles.repliesList}>
-        {repliesList?.length > 0 ? (
-          repliesList.map((reply) => (
-            <li key={reply.id} className={styles.listItem}>
-              <p className={styles.author}>
-                {reply.users.username} - {" "}
-                <span>{getTimeDiff(reply.created_at)}</span>
-              </p>
-              <p className={styles.message}>{reply.message}</p>
-            </li>
-          ))
-        ) : (
-          null
-        )}
+        {repliesList?.length > 0
+          ? repliesList.map((reply) => (
+              <li key={reply.id} className={styles.listItem}>
+                <p className={styles.author}>
+                  {reply.users.username} -{" "}
+                  <span>{getTimeDiff(reply.created_at)}</span>
+                </p>
+                <p className={styles.message}>{reply.message}</p>
+              </li>
+            ))
+          : null}
       </ul>
     </div>
   );

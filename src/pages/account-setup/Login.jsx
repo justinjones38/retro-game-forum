@@ -1,54 +1,58 @@
-import { useState } from "react"
-import styles from "./Login.module.css"
+import { useState } from "react";
+import styles from "./Login.module.css";
 import { Link, useNavigate } from "react-router";
 import AccountFormInputs from "../../components/AccountFormInputs";
 import { supabase } from "../../services/createClient";
 import { useOutletContext } from "react-router";
+import { checkPassword } from "../../utils/utils";
 
 export default function Login() {
   const [formInputs, setFormInputs] = useState({
     username: "",
-    password: ""
-  })
+    password: "",
+  });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const {setIsLoggedIn} = useOutletContext()
+  const { setIsLoggedIn } = useOutletContext();
 
-  const handleChange = e => {
-    setFormInputs(prev => ({
+  const handleChange = (e) => {
+    setFormInputs((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
-    }))
-  }
+      [e.target.name]: e.target.value,
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const {data, error} = await supabase
+      const { data, error } = await supabase
         .from("users")
         .select("*")
         .eq("username", formInputs.username)
-        .eq("password", formInputs.password)
-        .single()
+        .single();
+      console.log(data);
+      const isPasswordCorrect = await checkPassword(
+        formInputs.password,
+        data.password,
+      );
+      console.log(isPasswordCorrect);
 
-      if(error) {
-        throw new Error("Email and/or password is not correct")
+      if (error || !isPasswordCorrect) {
+        throw new Error("Email and/or password is not correct");
       }
 
-      localStorage.setItem("username", formInputs.username)
+      localStorage.setItem("username", formInputs.username);
       setIsLoggedIn(true);
       navigate("/");
-    } catch(error) {
-      setError(error.message)
+    } catch (error) {
+      setError(error.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-
-
-  }
+  };
 
   return (
     <section className={styles.container}>
@@ -63,7 +67,7 @@ export default function Login() {
           id="username"
           placeholder="abc123"
         >
-        Username
+          Username
         </AccountFormInputs>
 
         <AccountFormInputs
@@ -74,15 +78,18 @@ export default function Login() {
           id="password"
           placeholder="********"
         >
-        Password
+          Password
         </AccountFormInputs>
-        <button className={styles.btn} disabled={loading}> {loading ? "Logging in" : "Login"}</button>
+        <button className={styles.btn} disabled={loading}>
+          {" "}
+          {loading ? "Logging in" : "Login"}
+        </button>
       </form>
 
       <p className={styles.description}>
-        Don't have an account. <Link to="/create-account">Create new account here</Link>
+        Don't have an account.{" "}
+        <Link to="/create-account">Create new account here</Link>
       </p>
     </section>
-  )
+  );
 }
-

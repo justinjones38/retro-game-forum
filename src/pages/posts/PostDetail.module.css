@@ -35,7 +35,7 @@
 }
 
 .authorDetails > span {
-  color: var(--faded-text-color)
+  color: var(--faded-text-color);
 }
 
 .btnContainer {
@@ -57,7 +57,8 @@
   transition: 0.3s background-color;
 }
 
-.editBtn:focus, .editBtn:hover {
+.editBtn:focus,
+.editBtn:hover {
   background-color: var(--secondary-btn-bg-hover-color);
 }
 
@@ -67,10 +68,10 @@
   transition: 0.3s background-color;
 }
 
-.deleteBtn:focus, .deleteBtn:hover {
+.deleteBtn:focus,
+.deleteBtn:hover {
   background-color: var(--delete-btn-hover-color);
 }
-
 
 .message {
   margin-bottom: 0.75em;
@@ -97,10 +98,10 @@
   font-weight: 700;
 }
 
-.upvoteBtn:focus, .upvoteBtn:hover {
+.upvoteBtn:focus,
+.upvoteBtn:hover {
   background-color: var(--primary-btn-bg-hover-color);
 }
-
 
 .input {
   font-size: 1rem;

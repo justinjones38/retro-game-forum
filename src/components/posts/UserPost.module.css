@@ -22,7 +22,7 @@
 
 .time {
   font-size: 0.9rem;
-  color: var(--faded-text-color)
+  color: var(--faded-text-color);
 }
 
 .rightItem {
@@ -33,7 +33,7 @@
 }
 
 .likesCounter {
- text-align: center;
+  text-align: center;
 }
 
 .iconBtn {
@@ -61,7 +61,8 @@
   transition: 0.3s background-color;
 }
 
-.editBtn:focus, .editBtn:hover {
+.editBtn:focus,
+.editBtn:hover {
   background-color: var(--secondary-btn-bg-hover-color);
 }
 
@@ -71,7 +72,8 @@
   transition: 0.3s deleteBtn;
 }
 
-.deleteBtn:focus, .deleteBtn:hover {
+.deleteBtn:focus,
+.deleteBtn:hover {
   background-color: var(--delete-btn-hover-color);
 }
 

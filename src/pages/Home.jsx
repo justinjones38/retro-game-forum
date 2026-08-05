@@ -1,14 +1,13 @@
-import { useOutletContext, Navigate } from "react-router";
 import styles from "./Home.module.css";
+import { useOutletContext, Navigate } from "react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "../services/createClient";
 import Post from "../components/posts/Post";
 import Loading from "../components/Loading";
 import Modal from "../components/modals/ModalConfirm";
+import ErrorText from "../components/ErrorText";
 
 export default function Home() {
-  const username = localStorage.getItem("username");
-  const { isLoggedIn } = useOutletContext();
   const [posts, setPosts] = useState(null);
   const [workingPosts, setWorkingPosts] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -16,24 +15,28 @@ export default function Home() {
   const [errorLike, setErrorLike] = useState("");
   const [input, setInput] = useState("");
   const [sortBy, setSortBy] = useState("created_at");
+  const username = localStorage.getItem("username");
+  const { isLoggedIn } = useOutletContext();
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(sortBy);
         setLoading(true);
-        const { data, error } = await supabase
+        const {data, error} = await supabase
           .from("posts")
           .select(`*, users(*)`)
           .order("created_at", { ascending: false });
 
+        console.log(error);
         if (error) {
-          throw new Error("Cannot fetch post");
+          throw new Error("Forum Data is not available right now. Please check back later");
         }
 
         setPosts(data);
         setWorkingPosts(data);
       } catch (error) {
+        console.log(error.message)
         setError(error.message);
       } finally {
         setLoading(false);
@@ -41,6 +44,7 @@ export default function Home() {
     };
     fetchData();
   }, []);
+  console.log(error);
 
   useEffect(() => {
     setWorkingPosts((prev) =>
@@ -96,7 +100,6 @@ export default function Home() {
       {isLoggedIn ? (
         <h2 className={styles.title}>Welcome {username}!</h2>
       ) : null}
-      {loading ? <Loading /> : null}
       <div className={styles.contentInputs}>
         <input
           type="text"
@@ -117,6 +120,8 @@ export default function Home() {
         </select>
       </div>
 
+      {loading ? <Loading /> : null}
+      {error ? <ErrorText>{error}</ErrorText> : null}
       {!loading && !error && posts && workingPosts?.length === 0 ? (
         <p className={styles.alert}>No forums available</p>
       ) : null}

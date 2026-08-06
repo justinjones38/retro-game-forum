@@ -2,7 +2,7 @@
 
 A retro game forum for users to discuss their favorite games of old. It is built with React, contains pseudo authentication and allows users to create, edit, delete, and like posts.  
 
-[Demo Video](https://effervescent-profiterole-404649.netlify.app/dashboard)
+[Live Demo](https://bytebits3181.netlify.app/)
 
 ---
  

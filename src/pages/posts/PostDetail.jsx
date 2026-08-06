@@ -65,7 +65,8 @@ export default function PostDetail() {
       [e.target.name]: e.target.value,
     }));
 
-  const handleEditPost = async () => {
+  const handleEditPost = async (e) => {
+    e.preventDefault();
     try {
       const { error } = await supabase
         .from("posts")
